@@ -84,11 +84,11 @@ const Register = () => {
                     </Item>
                     <ButtonContainer>
                         <Item>
-                            <GreenButton tag={"Créer un compte"} onClick={handleCreate} />
+                            <GreenButton onClick={handleCreate}>Créer un compte</GreenButton>
                         </Item>
                         <p>ou</p>
                         <Item >
-                            <WhiteButton tag={"Connectez-vous"} onClick={() => redirect("/login")} />
+                            <WhiteButton onClick={() => redirect("/login")}>Connectez-vous</WhiteButton>
                         </Item>
                     </ButtonContainer>
                 </RegisterContainer>

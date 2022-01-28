@@ -70,6 +70,9 @@ const Navbar = () => {
                         <Item onClick={() => redirect("/register")}>
                             Register
                         </Item>
+                        <Item onClick={() => redirect("/contact")}>
+                            Contact
+                        </Item>
                     </ItemContainer>
                 </DropdownContainer>
             }

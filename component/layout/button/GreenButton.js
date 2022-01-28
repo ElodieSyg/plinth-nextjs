@@ -18,7 +18,7 @@ const GreenButton = (props) => {
     return (
         <>
             <StyledButton onClick={props.onClick}>
-                {props.tag}
+                {props.children}
             </StyledButton>
         </>
     );

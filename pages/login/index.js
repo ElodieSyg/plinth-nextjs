@@ -72,11 +72,11 @@ const Login = () => {
                     </Item>
                     <ButtonContainer>
                         <Item>
-                            <GreenButton tag={"Se connecter"} onClick={handleConnect} />
+                            <GreenButton onClick={handleConnect}Se connecter></GreenButton>
                         </Item>
                         <p>ou</p>
                         <Item >
-                            <WhiteButton tag={"Créer un compte"} onClick={() => redirect("/register")} />
+                            <WhiteButton onClick={() => redirect("/register")}>Créer un compte</WhiteButton>
                         </Item>
                     </ButtonContainer>
                 </LoginContainer>
