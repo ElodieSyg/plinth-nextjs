@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Head from "next/head";
 import axios from "axios";
 import { server } from "../../tools";
@@ -39,8 +39,6 @@ const Login = () => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 
-    console.log("email", email, "password", password);
-
     const handleConnect = () => {
         axios.post(`${server}/api/login`, { email, password }, { withCredentials: true })
             .then(res => {
@@ -72,7 +70,7 @@ const Login = () => {
                     </Item>
                     <ButtonContainer>
                         <Item>
-                            <GreenButton onClick={handleConnect}Se connecter></GreenButton>
+                            <GreenButton onClick={handleConnect}>Se connecter</GreenButton>
                         </Item>
                         <p>ou</p>
                         <Item >

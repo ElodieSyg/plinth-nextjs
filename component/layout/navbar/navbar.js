@@ -3,6 +3,9 @@ import Image from "next/image";
 import styled from "styled-components";
 // UTILS FUNCTIONS
 import redirect from "../../../utils/redirect";
+// STYLED COMPONENTS IMPORTATION
+import GreenRoundedButton from "../button/GreenRoundedButton";
+import WhiteRoundedButton from "../button/WhiteRoundedButton";
 
 // STYLED COMPONENTS
 const NavbarContainer = styled.div`
@@ -32,52 +35,129 @@ const ItemContainer = styled.div`
 
 const Item = styled.div`
     padding: 0.5rem;
+    display: flex;
+`;
+
+const ButtonItem = styled.div`
+    margin-left: 1rem;
+`;
+
+const ButtonContainer = styled.div`
+    display: flex;
 `;
 
 const Navbar = () => {
     const [isOpen, setOpen] = useState(false);
 
+    const MobileComponent = () => {
+        return (
+            <div>
+                <NavbarContainer>
+                    <Item>
+                        <Image
+                            src="/logo.png"
+                            alt="Plinth Logo"
+                            width={150}
+                            height={100}
+                            onClick={() => redirect("/")} />
+                    </Item>
+                    <Item>
+                        <Image
+                            src="/menu.png"
+                            alt="Menu item"
+                            width={35}
+                            height={35}
+                            onClick={() => setOpen(!isOpen)} />
+                    </Item>
+                </NavbarContainer>
+                {
+                    isOpen &&
+                    <DropdownContainer>
+                        <ItemContainer>
+                            <Item onClick={() => redirect("/catalogue")}>
+                                Catalogue
+                            </Item>
+                            <Item onClick={() => redirect("/login")}>
+                                Login
+                            </Item>
+                            <Item onClick={() => redirect("/register")}>
+                                Register
+                            </Item>
+                            <Item onClick={() => redirect("/contact")}>
+                                Contact
+                            </Item>
+                        </ItemContainer>
+                    </DropdownContainer>
+                }
+            </div>
+        );
+    };
+
+    const DesktopComponent = () => {
+        return (
+            <div>
+                <NavbarContainer>
+                    <Item>
+                        <Image
+                            src="/logo.png"
+                            alt="Plinth Logo"
+                            width={150}
+                            height={100}
+                            onClick={() => redirect("/")} />
+                    </Item>
+                    <ButtonContainer>
+                        <ButtonItem>
+                            <GreenRoundedButton onClick={() => redirect("/login")}>Connexion</GreenRoundedButton>
+                        </ButtonItem>
+                        <ButtonItem>
+                            <WhiteRoundedButton onClick={() => redirect("/register")}>Créer un compte</WhiteRoundedButton>
+                        </ButtonItem>
+                    </ButtonContainer>
+                </NavbarContainer>
+            </div>
+        );
+    };
+
+    const isLoggedMobileComponent = () => {
+        return (
+            <div>
+                <NavbarContainer>
+                    <Item>
+                        <Image
+                            src="/logo.png"
+                            alt="Plinth Logo"
+                            width={150}
+                            height={100}
+                            onClick={() => redirect("/")} />
+                    </Item>
+                </NavbarContainer>
+            </div>
+        );
+    };
+
+    const isLoggedDesktopComponent = () => {
+        return (
+            <div>
+                <NavbarContainer>
+                    <Item>
+                        <Image
+                            src="/logo.png"
+                            alt="Plinth Logo"
+                            width={150}
+                            height={100}
+                            onClick={() => redirect("/")} />
+                    </Item>
+                </NavbarContainer>
+            </div>
+        );
+    };
+
     return (
-        <>
-            <NavbarContainer>
-                <Item>
-                    <Image
-                        src="/logo.png"
-                        alt="Plinth Logo"
-                        width={150}
-                        height={100}
-                        onClick={() => redirect("/")} />
-                </Item>
-                <Item>
-                    <Image
-                        src="/menu.png"
-                        alt="Menu item"
-                        width={35}
-                        height={35}
-                        onClick={() => setOpen(!isOpen)} />
-                </Item>
-            </NavbarContainer>
-            {
-                isOpen &&
-                <DropdownContainer>
-                    <ItemContainer>
-                        <Item onClick={() => redirect("/catalogue")}>
-                            Catalogue
-                        </Item>
-                        <Item onClick={() => redirect("/login")}>
-                            Login
-                        </Item>
-                        <Item onClick={() => redirect("/register")}>
-                            Register
-                        </Item>
-                        <Item onClick={() => redirect("/contact")}>
-                            Contact
-                        </Item>
-                    </ItemContainer>
-                </DropdownContainer>
-            }
-        </>
+        <div>
+            <MobileComponent />
+        </div>
     );
+
 };
 
 export default Navbar;
