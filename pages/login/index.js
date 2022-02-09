@@ -1,7 +1,7 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
+import { getSession, signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import Head from "next/head";
-import axios from "axios";
-import { server } from "../../tools";
 import styled from "styled-components";
 // UTILS FUNCTIONS
 import redirect from "../../utils/redirect";
@@ -38,12 +38,15 @@ const ButtonContainer = styled.div`
 const Login = () => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const { status, loading } = useSession();
+    const Router = useRouter();
 
-    const handleConnect = () => {
-        axios.post(`${server}/api/login`, { email, password }, { withCredentials: true })
-            .then(res => {
-                console.log("result", res)
-            });
+    const preventDefault = (e) => {
+        e.preventDefault();
+    };
+
+    if (status === "authenticated") {
+        Router.push("/dashboard");
     };
 
     return (
@@ -54,23 +57,25 @@ const Login = () => {
 
             <Navbar />
             <GlobalContainer>
-                <LoginContainer>
+                <LoginContainer onSubmit={(e) => preventDefault(e)}>
                     <GreenTitle>Connexion</GreenTitle>
                     <Item>
                         <BasicInput
                             type="text"
                             placeholder="Email"
+                            name="email"
                             onChange={(e) => setEmail(e.target.value)} />
                     </Item>
                     <Item>
                         <BasicInput
                             type="password"
                             placeholder="Password"
+                            name="password"
                             onChange={(e) => setPassword(e.target.value)} />
                     </Item>
                     <ButtonContainer>
                         <Item>
-                            <GreenButton onClick={handleConnect}>Se connecter</GreenButton>
+                            <GreenButton onClick={() => signIn()}>Se connecter</GreenButton>
                         </Item>
                         <p>ou</p>
                         <Item >
@@ -81,6 +86,18 @@ const Login = () => {
             </GlobalContainer>
         </>
     );
+};
+
+// SESSION IS NULL OR UNDEFINED, WE HAVE TO CREATE OWN GETSESSION  !!!! //
+export async function getServerSideProps({ req }) {
+    const session = await getSession({ req });
+    console.log(session, "in server side props")
+
+    return {
+        props: {
+            session,
+        },
+    };
 };
 
 export default Login;

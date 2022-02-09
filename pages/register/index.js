@@ -44,7 +44,10 @@ const Register = () => {
     const handleCreate = () => {
         axios.post(`${server}/api/register`, { name, surname, email, password }, { withCredentials: true })
             .then((res) => {
-                console.log("User created", res)
+                console.log("User created", res);
+                if (res.data.status === "Success") {
+                    redirect("/login");
+                };
             });
     };
 

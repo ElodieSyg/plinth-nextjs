@@ -21,10 +21,13 @@ export default async function handle(req, res) {
 
 const postUser = async (req, res) => {
     const { name, surname, email, password } = req.body;
+    console.log("body", name, surname, email, password)
     const hashedPassword = await bcrypt.hash(password, 12);
+    console.log("hashed password", hashedPassword);
 
     try {
         const newUser = await User.create({ name, surname, email, password: hashedPassword });
+        console.log("new user", newUser)
 
         return res.status(201).json({
             status: "Success",

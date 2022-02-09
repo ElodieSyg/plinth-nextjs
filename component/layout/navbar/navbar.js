@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import styled from "styled-components";
 // UTILS FUNCTIONS
@@ -6,6 +7,7 @@ import redirect from "../../../utils/redirect";
 // STYLED COMPONENTS IMPORTATION
 import GreenRoundedButton from "../button/GreenRoundedButton";
 import WhiteRoundedButton from "../button/WhiteRoundedButton";
+import GreenSmallText from "../../text/GreenSmallText";
 
 // STYLED COMPONENTS
 const NavbarContainer = styled.div`
@@ -36,6 +38,7 @@ const ItemContainer = styled.div`
 const Item = styled.div`
     padding: 0.5rem;
     display: flex;
+    cursor: pointer;
 `;
 
 const ButtonItem = styled.div`
@@ -47,6 +50,7 @@ const ButtonContainer = styled.div`
 `;
 
 const Navbar = () => {
+    const { data: session, status } = useSession();
     const [isOpen, setOpen] = useState(false);
 
     const MobileComponent = () => {
@@ -105,6 +109,9 @@ const Navbar = () => {
                             height={100}
                             onClick={() => redirect("/")} />
                     </Item>
+                    <Item onClick={() => redirect("/catalogue")}>
+                        <GreenSmallText>Catalogue déconnecté</GreenSmallText>
+                    </Item>
                     <ButtonContainer>
                         <ButtonItem>
                             <GreenRoundedButton onClick={() => redirect("/login")}>Connexion</GreenRoundedButton>
@@ -146,6 +153,7 @@ const Navbar = () => {
                             width={150}
                             height={100}
                             onClick={() => redirect("/")} />
+                        <GreenSmallText>Catalogue connecté</GreenSmallText>
                     </Item>
                 </NavbarContainer>
             </div>
@@ -153,9 +161,7 @@ const Navbar = () => {
     };
 
     return (
-        <div>
-            <MobileComponent />
-        </div>
+        <DesktopComponent />
     );
 
 };

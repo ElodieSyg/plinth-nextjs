@@ -1,5 +1,7 @@
 import Head from "next/head";
+// COMPONENTS IMPORTATION
 import Navbar from "../../component/layout/navbar/navbar";
+import CatalogMap from "../../component/map/catalogMap";
 
 const Catalogue = () => {
     return (
@@ -9,6 +11,7 @@ const Catalogue = () => {
             </Head>
 
             <Navbar />
+            {/* <CatalogMap /> */}
             Catalogue
         </>
     );
