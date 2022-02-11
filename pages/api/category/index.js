@@ -23,8 +23,10 @@ export default function handle(req, res) {
 };
 
 const getCategories = async (req, res) => {
+    console.log("insite get method")
     try {
         const categories = await Category.find({});
+        console.log("categories", categories);
 
         if (!categories) {
             throw "Categories not found";
