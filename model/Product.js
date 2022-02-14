@@ -2,29 +2,30 @@ import mongoose from "mongoose";
 
 const ProductSchema = new mongoose.Schema({
     userId: {
-        type: mongoose.Types.ObjectId, ref: "User",
+        type: mongoose.Schema.Types.ObjectId, ref: "user",
+        required: false,
     },
     title: {
         type: String,
         required: true,
     },
     category: {
-        type: mongoose.Types.ObjectId, ref: "Category",
-        require: true
+        type: mongoose.Schema.Types.ObjectId, ref: "category",
+        required: true
     },
     description: {
         type: String,
         required: true,
     },
     status: {
-        type: mongoose.Types.ObjectId, ref: "Status",
+        type: mongoose.Schema.Types.ObjectId, ref: "status",
         required: true,
     },
     location: {
-        number: { type: Number, required: true },
-        address: { type: String, required: true },
-        city: { type: String, required: true },
-        postalCode: { type: String, required: true },
+        number: { type: Number, required: false },
+        address: { type: String, required: false },
+        city: { type: String, required: false },
+        postalCode: { type: String, required: false },
     },
     coordinate: {
         latitude: {
@@ -48,6 +49,4 @@ const ProductSchema = new mongoose.Schema({
     },
 });
 
-module.exports = 
-    mongoose.models.Product ||
-    mongoose.model("Product", ProductSchema);
+module.exports = mongoose.model("Product", ProductSchema);

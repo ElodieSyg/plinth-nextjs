@@ -3,6 +3,8 @@ import Head from "next/head";
 import styled from "styled-components";
 import axios from "axios";
 import { server } from "../../tools";
+// UTILS FUNCTIONS
+import redirect from "../../utils/redirect";
 // COMPONENTS IMPORTATION
 import Navbar from "../../component/layout/navbar/navbar";
 // STYLED COMPONENTS IMPORTATION
@@ -26,10 +28,6 @@ const FormContainer = styled.div`
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 `;
 
-const Option = styled.div`
-    background: blue;
-`;
-
 const Item = styled.div`
     margin: 0.5rem;
 `;
@@ -40,7 +38,10 @@ const Label = styled.p`
 `;
 
 const Select = styled.select`
-    background: red;
+    border: 1px solid #e5e6e6;
+    width: 15.7rem;
+    heigth: 3rem;
+    padding: 0.2rem;
 `;
 
 const NewProduct = () => {
@@ -70,7 +71,7 @@ const NewProduct = () => {
     }, []);
 
     const handleSend = () => {
-        axios.post(`${server}/api/announcement`,
+        axios.post(`${server}/api/product`,
             {
                 title,
                 category: selectedCategory,
@@ -87,7 +88,9 @@ const NewProduct = () => {
             },
             { withCredentials: true })
             .then(res => {
-                console.log("result", res);
+                if (res.data.status === "Success") {
+                    redirect("/catalogue");
+                };
             });
     };
 
@@ -117,7 +120,7 @@ const NewProduct = () => {
                             <Select onChange={e => setSelectedCategory(e.target.value)}>
                                 {
                                     categories.map(item => (
-                                        <option key={item._id} value={item.category}> {item.category}</option>
+                                        <option key={item._id} value={item._id}> {item.category}</option>
                                     ))
                                 }
                             </Select>
@@ -131,13 +134,13 @@ const NewProduct = () => {
                     </Item>
                     <Item>
                         <Label>État du bien</Label>
-                        <select onChange={e => setSelectedStatus(e.target.value)}>
+                        <Select onChange={e => setSelectedStatus(e.target.value)}>
                             {
                                 status.map(item => (
-                                    <option key={item._id} value={item.status}>{item.status}</option>
+                                    <option key={item._id} value={item._id}>{item.status}</option>
                                 ))
                             }
-                        </select>
+                        </Select>
                     </Item>
                     <Item>
                         <Label>Adresse où le bien est disponible</Label>

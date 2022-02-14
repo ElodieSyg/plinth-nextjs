@@ -10,9 +10,9 @@ const PositionContext = (props) => {
     };
 
     return (
-        <LocationContext.Provider value={value}>
+        <LocationContext.Consumer value={value}>
             {props.children}
-        </LocationContext.Provider>
+        </LocationContext.Consumer>
     );
 };
 

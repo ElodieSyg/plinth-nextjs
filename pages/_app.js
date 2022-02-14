@@ -1,18 +1,20 @@
 import { SessionProvider, useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+// CONTEXT IMPORTATION
+import { LocationContext } from "../context/PositionContext";
 
-export default function MyApp({ Component, pageProps: pageProps }) {
+export default function MyApp({ Component, pageProps }) {
   return (
-    <SessionProvider session={pageProps.session}>
-      {Component.auth ? (
-        <Auth>
+      <SessionProvider session={pageProps.session}>
+        {Component.auth ? (
+          <Auth>
+            <Component {...pageProps} />
+          </Auth>
+        ) : (
           <Component {...pageProps} />
-        </Auth>
-      ) : (
-        <Component {...pageProps} />
-      )}
-    </SessionProvider>
+        )}
+      </SessionProvider>
   );
 };
 
