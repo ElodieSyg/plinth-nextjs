@@ -17,7 +17,7 @@ const LoginContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid #e5e6e6;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 
     @media only screen and (min-width: 425px) {
         padding: 1rem 3rem 3rem 3rem;
