@@ -1,15 +1,15 @@
 import mongoose from "mongoose";
 
 const ProductSchema = new mongoose.Schema({
-    userId: {
+/*     userId: {
         type: mongoose.Schema.Types.ObjectId, ref: "user",
         required: false,
     },
-    title: {
+ */    title: {
         type: String,
         required: true,
     },
-    category: {
+     category: {
         type: mongoose.Schema.Types.ObjectId, ref: "category",
         required: true
     },
@@ -47,6 +47,7 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         default: "",
     },
-});
+ });
 
-module.exports = mongoose.model("Product", ProductSchema);
+module.exports =
+    mongoose.models.Product || mongoose.model("Product", ProductSchema);

@@ -35,12 +35,12 @@ const GreySmallText = styled.p`
 const Home = () => {
   const [products, setProducts] = useState();
 
-/*   useEffect(() => {
+   useEffect(() => {
     axios.get(`${server}/api/product`, { withCredentials: true })
       .then(res => {
         console.log("result", res);
       });
-  }, []); */
+  }, []);
 
   return (
     <>

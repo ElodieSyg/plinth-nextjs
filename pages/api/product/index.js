@@ -24,11 +24,11 @@ export default function handle(req, res) {
     };
 };
 
-const getProduct = async (_req, res) => {
+const getProduct = async (req, res) => {
     try {
         const products = await Product.find()
-            .populate({ path: "category", model: Category, })
-            .populate({ path: "status", model: Status });
+            .populate({ path: "category", model: Category, select: "category" })
+            .populate({ path: "status", model: Status, select: "status" });
 
         if (!products) throw new Error("Products not found");
 
