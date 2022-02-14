@@ -18,6 +18,10 @@ const ProductContainer = styled.div`
     flex-direction: column;
     flex: 1;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    scroll-behavior: smooth;
+    height: 25rem;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
 `;
 
 const MapContainer = styled.div`

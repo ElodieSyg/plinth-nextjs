@@ -42,7 +42,6 @@ const Home = () => {
       .then(res => {
         setProducts(res.data.products);
       });
-    console.log("products", products);
   }, []);
 
   if (!products) {
