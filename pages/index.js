@@ -19,7 +19,9 @@ const AboutContainer = styled.div`
 `;
 
 const CardContainer = styled.div`
-  background: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Item = styled.div`
@@ -35,12 +37,17 @@ const GreySmallText = styled.p`
 const Home = () => {
   const [products, setProducts] = useState();
 
-   useEffect(() => {
+  useEffect(() => {
     axios.get(`${server}/api/product`, { withCredentials: true })
       .then(res => {
-        console.log("result", res);
+        setProducts(res.data.products);
       });
+    console.log("products", products);
   }, []);
+
+  if (!products) {
+    return <div>Loading...</div>
+  };
 
   return (
     <>
@@ -65,7 +72,14 @@ const Home = () => {
         </AboutContainer>
       </GlobalContainer>
       <CardContainer>
-        Add home card
+        {
+          products.slice(0, 4).map(product => (
+            <HomeCard
+              key={product._id}
+              title={product.title}
+              description={product.description} />
+          ))
+        }
       </CardContainer>
     </>
   );

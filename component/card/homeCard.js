@@ -6,7 +6,8 @@ import GreenTitleItalic from "../layout/title/GreenTitleItalic";
 const Container = styled.div`
     margin: 1rem;
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    width: 15rem;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 
     :hover {
@@ -26,12 +27,12 @@ const ImageContainer = styled.div`
 const InfoContainer = styled.div`
     display: flex;
     flex-direction: column;
-    padding: 0.5rem;
-    margin: 1rem;
+    margin: 0rem 1rem 1rem 1rem;
 `;
 
 const Item = styled.div`
-    margin: 0.2rem;
+   display: flex;
+   justify-content: center;
 `;
 
 const ButtonContainer = styled.div`
@@ -50,13 +51,7 @@ const HomeCard = (props) => {
             <InfoContainer>
                 <GreenTitleItalic textAlign="center">{props.title}</GreenTitleItalic>
                 <Item>
-                    Category : {props.category}
-                </Item>
-                <Item>
-                    Description : {props.description}
-                </Item>
-                <Item>
-                    État : {props.status}
+                    {props.description}
                 </Item>
             </InfoContainer>
             <ButtonContainer>
