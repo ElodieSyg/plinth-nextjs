@@ -60,7 +60,7 @@ const CatalogCard = (props) => {
                 </Item>
             </InfoContainer>
             <ButtonContainer>
-                <GreenRoundedButton>Voir plus</GreenRoundedButton>
+                <GreenRoundedButton onClick={() => props.setIsShow(!props.isShow)}>Voir plus</GreenRoundedButton>
             </ButtonContainer>
         </Container>
     );
