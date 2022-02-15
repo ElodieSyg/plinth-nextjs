@@ -44,11 +44,11 @@ const ContactContainer = styled.div`
     align-items: center;
     justify-content: center;
     padding: 1rem;
-    margin: 1rem;
+    margin: 2rem 1rem 2rem 1rem;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 `;
 
-const Item = styled.div`
+const ButtonContainer = styled.div`
     margin: 0.5rem;
 `;
 
@@ -100,13 +100,13 @@ const Catalog = () => {
             <ContactContainer>
                 <GreenTitleItalic>Vous n avez pas encore trouvé votre bonheur ?</GreenTitleItalic>
                 <GreySmallText>Écrivez-nous en détaillant votre recherche, nous sourçons pour vous !</GreySmallText>
-                <Item>
+                <ButtonContainer>
                     <GreenRoundedButton
                         onClick={() => redirect("/contact")}
                         width="8rem">
                         Contactez-nous !
                     </GreenRoundedButton>
-                </Item>
+                </ButtonContainer>
             </ContactContainer>
         </>
     );
