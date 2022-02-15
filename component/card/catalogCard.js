@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 // COMPONENTS IMPORTATION
 import GreenRoundedButton from "../layout/button/GreenRoundedButton";
@@ -42,6 +43,8 @@ const ButtonContainer = styled.div`
 `;
 
 const CatalogCard = (props) => {
+    const [isShow, setIsShow] = useState(props.isShow);
+
     return (
         <Container>
             <ImageContainer>
@@ -60,7 +63,9 @@ const CatalogCard = (props) => {
                 </Item>
             </InfoContainer>
             <ButtonContainer>
-                <GreenRoundedButton onClick={() => props.setIsShow(!props.isShow)}>Voir plus</GreenRoundedButton>
+                <GreenRoundedButton width="5rem" onClick={() => setIsShow(!isShow)}>
+                    {isShow === true ? <p>Voir moins</p> : <p>Voir plus</p>}
+                </GreenRoundedButton>
             </ButtonContainer>
         </Container>
     );

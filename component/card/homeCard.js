@@ -55,7 +55,7 @@ const HomeCard = (props) => {
                 </Item>
             </InfoContainer>
             <ButtonContainer>
-                <GreenRoundedButton>Voir plus</GreenRoundedButton>
+                <GreenRoundedButton width="5rem">Voir plus</GreenRoundedButton>
             </ButtonContainer>
         </Container>
     );

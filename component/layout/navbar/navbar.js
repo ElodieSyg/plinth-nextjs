@@ -110,11 +110,11 @@ const Navbar = () => {
                             onClick={() => redirect("/")} />
                     </Item>
                     <Item onClick={() => redirect("/catalogue")}>
-                        <GreenSmallText>Catalogue déconnecté</GreenSmallText>
+                        <GreenSmallText>Catalogue</GreenSmallText>
                     </Item>
                     <ButtonContainer>
                         <ButtonItem>
-                            <GreenRoundedButton onClick={() => redirect("/login")}>Connexion</GreenRoundedButton>
+                            <GreenRoundedButton width="7rem" onClick={() => redirect("/login")}>Connexion</GreenRoundedButton>
                         </ButtonItem>
                         <ButtonItem>
                             <WhiteRoundedButton onClick={() => redirect("/register")}>Créer un compte</WhiteRoundedButton>

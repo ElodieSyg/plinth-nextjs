@@ -35,6 +35,7 @@ const MapContainer = styled.div`
     justify-content: center;
     align-items: center;
     flex: 1;
+    height: 180px
 `;
 
 const ContactContainer = styled.div`
@@ -54,8 +55,6 @@ const Item = styled.div`
 const Catalog = () => {
     const [products, setProducts] = useState();
     const [isShow, setIsShow] = useState(false);
-
-    console.log("is show?", isShow)
 
     useEffect(() => {
         axios.get(`${server}/api/product`, { withCredentials: true })
@@ -85,13 +84,12 @@ const Catalog = () => {
                                 category={product.category}
                                 description={product.description}
                                 status={product.status}
-                                isShow={isShow}
-                                setIsShow={setIsShow} />
+                                isShow={isShow} />
                         ))
                     }
                 </ProductContainer>
                 <MapContainer>
-                    CatalogMap
+                    {/*  <CatalogMap /> */}
                 </MapContainer>
             </Flexbox>
             {
@@ -103,7 +101,11 @@ const Catalog = () => {
                 <GreenTitleItalic>Vous n avez pas encore trouvé votre bonheur ?</GreenTitleItalic>
                 <GreySmallText>Écrivez-nous en détaillant votre recherche, nous sourçons pour vous !</GreySmallText>
                 <Item>
-                    <GreenRoundedButton onClick={() => redirect("/contact")}>Contactez-nous !</GreenRoundedButton>
+                    <GreenRoundedButton
+                        onClick={() => redirect("/contact")}
+                        width="8rem">
+                        Contactez-nous !
+                    </GreenRoundedButton>
                 </Item>
             </ContactContainer>
         </>

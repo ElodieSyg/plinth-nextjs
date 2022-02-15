@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 // CONTEXT IMPORTATION
 import { LocationContext } from "../context/PositionContext";
+// CSS IMPORTATION
+import "../styles/globals.css";
 
 export default function MyApp({ Component, pageProps }) {
   return (

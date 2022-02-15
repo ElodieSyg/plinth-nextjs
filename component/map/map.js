@@ -2,7 +2,7 @@ import { TileLayer, Popup, useMap, Circle } from 'react-leaflet';
 
 const MyMap = (props) => {
     const map = useMap();
-    map.setView(props.center, props.zoom);
+    map.setView([51.505, -0.09], 13);
 
     return (
         <div>
