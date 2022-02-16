@@ -13,6 +13,7 @@ import Navbar from "../../component/layout/navbar/navbar";
 import CatalogCard from "../../component/card/catalogCard";
 import Loader from "../../component/loader";
 import CatalogMap from "../../component/map/catalogMap";
+import FilterBar from "../../component/filterBar";
 // STYLED COMPONENTS IMPORTATIONS
 import GreenRoundedButton from "../../component/layout/button/GreenRoundedButton";
 import GreySmallText from "../../component/text/GreySmallText";
@@ -59,8 +60,6 @@ const ButtonContainer = styled.div`
     margin: 0.5rem;
 `;
 
-const CardContainer = styled.div``;
-
 const DetailsContainer = styled.div`
     margin: 1rem 1rem 1rem 1rem;
     padding: 1rem;
@@ -85,10 +84,14 @@ const ImageContainer = styled.div`
     align-items: center;
 `;
 
+
 const Catalog = () => {
     const [products, setProducts] = useState();
     const [selectedProduct, setSelectedProduct] = useState();
     const [isShow, setIsShow] = useState(false);
+    const [filter, setFilter] = useState(false);
+    const [isFilter, setIsFilter] = useState(false);
+    const [data, setData] = useState([]);
 
     useEffect(() => {
         axios.get(`${server}/api/product`, { withCredentials: true })
@@ -97,15 +100,26 @@ const Catalog = () => {
             });
     }, []);
 
+    const handleClickInfo = (product) => {
+        setIsShow(!isShow);
+        setSelectedProduct(product);
+    };
+
+    const searchText = (e) => {
+        setFilter(e.target.value);
+        setIsFilter(true);
+
+        let dataSearch = products.filter(item => {
+            return Object.keys(item).some(key =>
+                item[key].toString().toLowerCase().includes(filter.toString().toLowerCase()))
+        });
+        setData(dataSearch);
+    };
+
     if (!products) {
         return (
             <Loader />
         );
-    };
-
-    const handleClickInfo = (product) => {
-        setIsShow(!isShow);
-        setSelectedProduct(product);
     };
 
     return (
@@ -115,26 +129,52 @@ const Catalog = () => {
             </Head>
 
             <Navbar />
+
             <Flexbox>
-                <ProductContainer>
-                    {
-                        products.map(product => (
-                            <CardContainer key={uuidv4()} onClick={() => handleClickInfo(product)}>
-                                <CatalogCard
-                                    id={product._id}
-                                    title={product.title}
-                                    category={product.category}
-                                    description={product.description}
-                                    status={product.status}
-                                    isShow={isShow}
-                                    setIsShow={setIsShow}
-                                />
-                            </CardContainer>
-                        ))
-                    }
-                </ProductContainer>
+                <div>
+                    <FilterBar
+                        placeholder="Que recherchez-vous ?"
+                        value={filter}
+                        onChange={searchText.bind(this)}
+                    />
+                    <ProductContainer>
+                        {
+                            isFilter
+                                ? data.map(product => (
+                                    <div
+                                        key={uuidv4()}
+                                        onClick={() => handleClickInfo(product)}>
+                                        <CatalogCard
+                                            id={product._id}
+                                            title={product.title}
+                                            category={product.category}
+                                            description={product.description}
+                                            status={product.status}
+                                            isShow={isShow}
+                                            setIsShow={setIsShow}
+                                        />
+                                    </div>
+                                ))
+                                : products.map(product => (
+                                    <div
+                                        key={uuidv4()}
+                                        onClick={() => handleClickInfo(product)}>
+                                        <CatalogCard
+                                            id={product._id}
+                                            title={product.title}
+                                            category={product.category}
+                                            description={product.description}
+                                            status={product.status}
+                                            isShow={isShow}
+                                            setIsShow={setIsShow}
+                                        />
+                                    </div>
+                                ))
+                        }
+                    </ProductContainer>
+                </div>
                 <MapContainer>
-                    <CatalogMap />
+                    {/* <CatalogMap /> */}
                 </MapContainer>
             </Flexbox>
             {
