@@ -1,4 +1,10 @@
+.map {
+  display: flex;
+  width: 50%;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
 .mapContainer {
-  background-color: aqua;
-  height: 180px;
+  height: 384px;
+  width: 640px;
 }

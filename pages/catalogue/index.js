@@ -11,6 +11,7 @@ import redirect from "../../utils/redirect";
 import Navbar from "../../component/layout/navbar/navbar";
 import CatalogCard from "../../component/card/catalogCard";
 import Loader from "../../component/loader";
+import CatalogMap from "../../component/map/catalogMap";
 // STYLED COMPONENTS IMPORTATION
 import GreenTitleItalic from "../../component/layout/title/GreenTitleItalic";
 import GreenRoundedButton from "../../component/layout/button/GreenRoundedButton";
@@ -34,11 +35,13 @@ const ProductContainer = styled.div`
 `;
 
 const MapContainer = styled.div`
-    background: grey;
     display: flex;
     justify-content: center;
     align-items: center;
     flex: 1;
+    height: 384px;
+    width: 640px;
+    background: red;
 `;
 
 const ContactContainer = styled.div`
@@ -62,7 +65,6 @@ const DetailsContainer = styled.div`
 `;
 
 const CardContainer = styled.div`
-
 `;
 
 const Catalog = () => {
@@ -86,7 +88,6 @@ const Catalog = () => {
     const handleClickInfo = (product) => {
         setIsShow(!isShow);
         setSelectedProduct(product);
-        console.log("info", product);
     };
 
     return (
@@ -114,8 +115,9 @@ const Catalog = () => {
                         ))
                     }
                 </ProductContainer>
-                {/*                 <MapContainer>
-                </MapContainer> */}
+                <MapContainer>
+                    <CatalogMap />
+                </MapContainer>
             </Flexbox>
             {
                 isShow && (
