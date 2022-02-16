@@ -62,11 +62,11 @@ const CatalogCard = (props) => {
                     État : {props.status}
                 </Item>
             </InfoContainer>
-            <ButtonContainer>
-                <GreenRoundedButton width="5rem" onClick={() => setIsShow(!isShow)}>
-                    {isShow === true ? <p>Voir moins</p> : <p>Voir plus</p>}
+{/*             <ButtonContainer>
+                <GreenRoundedButton width="5rem" onClick={() => props.setIsShow(!props.isShow)}>
+                    Voir plus
                 </GreenRoundedButton>
-            </ButtonContainer>
+            </ButtonContainer> */}
         </Container>
     );
 };

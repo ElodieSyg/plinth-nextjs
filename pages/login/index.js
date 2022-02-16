@@ -45,9 +45,9 @@ const Login = () => {
         e.preventDefault();
     };
 
-    if (status === "authenticated") {
+/*     if (status === "authenticated") {
         Router.push("/dashboard");
-    };
+    }; */
 
     return (
         <>
@@ -87,7 +87,7 @@ const Login = () => {
         </>
     );
 };
-
+/* 
 // SESSION IS NULL OR UNDEFINED, WE HAVE TO CREATE OWN GETSESSION  !!!! //
 export async function getServerSideProps({ req }) {
     const session = await getSession({ req });
@@ -99,5 +99,5 @@ export async function getServerSideProps({ req }) {
         },
     };
 };
-
+ */
 export default Login;

@@ -49,7 +49,7 @@ export default NextAuth({
                     const token = jwt.sign(
                         { _id: user._id },
                         process.env.JWT_SECRET,
-                        { expiresIn: "24h"},
+                        { expiresIn: "24h" },
                     );
                     console.log("token", token)
 
@@ -81,16 +81,17 @@ export default NextAuth({
             if (token) {
                 session.id = token.id;
             };
-
             return session
         },
-        async signIn({ user }) {
+        async signIn(user, account, profile) {
             console.log("inside signIn callback");
-            console.log("user in signIn callback", user)
-            try {
-                await dbConnect();
-                return true;
-            } catch (error) {
+            console.log("user :", user);
+            console.log("profile :", profile);
+            console.log("account :", account);
+            if (user && user.isActive === "1") {
+                console.log("User is connected");
+                return user;
+            } else {
                 return false;
             };
         },
@@ -101,7 +102,7 @@ export default NextAuth({
         encryption: true,
     },
     pages: {
-        signIn: "/dashboard",
+        // signIn: "/",
         // signOut: "/auth/logout",
         // error: "/auth/error",
         // newUser: "/auth/new-user",

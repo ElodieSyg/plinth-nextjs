@@ -1,17 +1,14 @@
-import { useState, createContext, useEffect, useMemo } from "react";
+import { useState, createContext, useEffect } from "react";
 
 export const UserContext = createContext();
 
-const UserCtx = (props) => {
+const UserProvider = (props) => {
     const [isLogged, setLogged] = useState(false);
-
-    const value = useMemo(() => {
-
-    })
-/*     const value = (useMemo) {
-        isLogged, setLogged,
+    const value = {
+        isLogged, 
+        setLogged,
     };
- */
+
     useEffect(() => {
         console.log("is logged in user context", isLogged);
     }, []);
@@ -23,4 +20,4 @@ const UserCtx = (props) => {
     );
 };
 
-export default UserCtx;
+export default UserProvider;

@@ -1,15 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, createContext } from "react";
 import { server } from "../tools";
 import axios from "axios";
 import Head from "next/head";
 import Image from "next/image";
 import styled from "styled-components";
+import { v4 as uuidv4 } from "uuid";
 // COMPONENTS IMPORTATION
 import Navbar from "../component/layout/navbar/navbar";
 import HomeCard from "../component/card/homeCard";
+import Loader from "../component/loader";
 // STYLED COMPONENTS IMPORTATION
 import BlackTitle from "../component/layout/title/BlackTitle";
 import GlobalContainer from "../styles/styled-components/container/GlobalContainer";
+// CONTEXT
+import GreenRoundedButton from "../component/layout/button/GreenRoundedButton";
 
 const AboutContainer = styled.div`
   display: flex;
@@ -45,7 +49,9 @@ const Home = () => {
   }, []);
 
   if (!products) {
-    return <div>Loading...</div>
+    return (
+      <Loader />
+    );
   };
 
   return (
@@ -74,7 +80,7 @@ const Home = () => {
         {
           products.slice(0, 4).map(product => (
             <HomeCard
-              key={product._id}
+              key={uuidv4()}
               title={product.title}
               description={product.description} />
           ))

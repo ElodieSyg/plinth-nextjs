@@ -7,6 +7,7 @@ import { server } from "../../tools";
 import redirect from "../../utils/redirect";
 // COMPONENTS IMPORTATION
 import Navbar from "../../component/layout/navbar/navbar";
+import Loader from "../../component/loader";
 // STYLED COMPONENTS IMPORTATION
 import StyledInput from "../../component/layout/input/StyledInput";
 import GreenTitle from "../../component/layout/title/GreenTitle";
@@ -95,7 +96,9 @@ const NewProduct = () => {
     };
 
     if (!categories || !status) {
-        return <div>Loading...</div>
+        return (
+            <Loader />
+        );
     };
 
     return (

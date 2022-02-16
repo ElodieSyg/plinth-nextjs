@@ -2,7 +2,7 @@ import { useState, createContext } from "react";
 
 export const LocationContext = createContext();
 
-const PositionContext = (props) => {
+const LocationProvider = (props) => {
     const [position, setPosition] = useState([]);
     const value = {
         position,
@@ -10,10 +10,10 @@ const PositionContext = (props) => {
     };
 
     return (
-        <LocationContext.Consumer value={value}>
+        <LocationContext.Provider value={value}>
             {props.children}
-        </LocationContext.Consumer>
+        </LocationContext.Provider>
     );
 };
 
-export default PositionContext;
+export default LocationProvider;

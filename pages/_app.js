@@ -1,22 +1,30 @@
 import { SessionProvider, useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-// CONTEXT IMPORTATION
-import { LocationContext } from "../context/PositionContext";
+// COMPONENTS IMPORTATION
+import Loader from "../component/loader";
+// CONTEXTS IMPORTATION
+import LocationProvider from "../context/LocationContext";
+import UserProvider from "../context/UserContext";
 // CSS IMPORTATION
 import "../styles/globals.css";
 
 export default function MyApp({ Component, pageProps }) {
+
   return (
-      <SessionProvider session={pageProps.session}>
-        {Component.auth ? (
-          <Auth>
-            <Component {...pageProps} />
-          </Auth>
-        ) : (
-          <Component {...pageProps} />
-        )}
-      </SessionProvider>
+    <SessionProvider session={pageProps.session}>
+      <UserProvider>
+        <LocationProvider>
+          {/*       {Component.auth ? ( */}
+          {/*           <Auth>
+ */}            <Component {...pageProps} />
+          {/*           </Auth>
+ */}{/*         ) : (
+   */}          {/* <Component {...pageProps} /> */}
+          {/*         )}
+ */}      </LocationProvider>
+      </UserProvider>
+    </SessionProvider>
   );
 };
 
@@ -34,5 +42,7 @@ function Auth({ children }) {
   };
   // Session is being fetched, or no user.
   // If no user, useEffect() will redirect.
-  return <div>Loading...</div>
+  return (
+    <Loader />
+  )
 };

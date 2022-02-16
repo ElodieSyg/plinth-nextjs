@@ -3,12 +3,15 @@ import { server } from "../../tools";
 import Head from "next/head";
 import axios from "axios";
 import styled from "styled-components";
+import { v4 as uuidv4 } from "uuid";
+import moment from "moment";
 // UTILS FUNCTIONS IMPORTATION
 import redirect from "../../utils/redirect";
 // COMPONENTS IMPORTATION
 import Navbar from "../../component/layout/navbar/navbar";
 import CatalogCard from "../../component/card/catalogCard";
-import CatalogMap from "../../component/map/catalogMap";
+import Loader from "../../component/loader";
+// STYLED COMPONENTS IMPORTATION
 import GreenTitleItalic from "../../component/layout/title/GreenTitleItalic";
 import GreenRoundedButton from "../../component/layout/button/GreenRoundedButton";
 import GreySmallText from "../../component/text/GreySmallText";
@@ -27,6 +30,7 @@ const ProductContainer = styled.div`
     height: 25rem;
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
+    cursor: pointer;
 `;
 
 const MapContainer = styled.div`
@@ -35,7 +39,6 @@ const MapContainer = styled.div`
     justify-content: center;
     align-items: center;
     flex: 1;
-    height: 180px
 `;
 
 const ContactContainer = styled.div`
@@ -44,7 +47,7 @@ const ContactContainer = styled.div`
     align-items: center;
     justify-content: center;
     padding: 1rem;
-    margin: 2rem 1rem 2rem 1rem;
+    margin: 1rem 1rem 1rem 1rem;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 `;
 
@@ -52,8 +55,19 @@ const ButtonContainer = styled.div`
     margin: 0.5rem;
 `;
 
+const DetailsContainer = styled.div`
+    margin: 1rem 1rem 1rem 1rem;
+    padding: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+`;
+
+const CardContainer = styled.div`
+
+`;
+
 const Catalog = () => {
     const [products, setProducts] = useState();
+    const [selectedProduct, setSelectedProduct] = useState();
     const [isShow, setIsShow] = useState(false);
 
     useEffect(() => {
@@ -64,7 +78,15 @@ const Catalog = () => {
     }, []);
 
     if (!products) {
-        return <div>Loading...</div>
+        return (
+            <Loader />
+        );
+    };
+
+    const handleClickInfo = (product) => {
+        setIsShow(!isShow);
+        setSelectedProduct(product);
+        console.log("info", product);
     };
 
     return (
@@ -78,23 +100,33 @@ const Catalog = () => {
                 <ProductContainer>
                     {
                         products.map(product => (
-                            <CatalogCard
-                                key={product._id}
-                                title={product.title}
-                                category={product.category}
-                                description={product.description}
-                                status={product.status}
-                                isShow={isShow} />
+                            <CardContainer key={uuidv4()} onClick={() => handleClickInfo(product)}>
+                                <CatalogCard
+                                    id={product._id}
+                                    title={product.title}
+                                    category={product.category}
+                                    description={product.description}
+                                    status={product.status}
+                                    isShow={isShow}
+                                    setIsShow={setIsShow}
+                                />
+                            </CardContainer>
                         ))
                     }
                 </ProductContainer>
-                <MapContainer>
-                    {/*  <CatalogMap /> */}
-                </MapContainer>
+                {/*                 <MapContainer>
+                </MapContainer> */}
             </Flexbox>
             {
                 isShow && (
-                    <div>HEY</div>
+                    <DetailsContainer>
+                        <GreenTitleItalic>{selectedProduct.title}</GreenTitleItalic>
+                        <GreySmallText>Description : {selectedProduct.description}</GreySmallText>
+                        <GreySmallText>Catégorie : {selectedProduct.category}</GreySmallText>
+                        <GreySmallText>État : {selectedProduct.status}</GreySmallText>
+                        <GreySmallText>Début de disponibilité : {moment(selectedProduct.startDate).format("LL")}</GreySmallText>
+                        <GreySmallText>Fin de disponibilité : {moment(selectedProduct.endDate).format("LL")}</GreySmallText>
+                    </DetailsContainer>
                 )
             }
             <ContactContainer>
