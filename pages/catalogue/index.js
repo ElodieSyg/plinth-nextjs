@@ -1,21 +1,22 @@
 import { useState, useEffect } from "react";
-import { server } from "../../tools";
 import Head from "next/head";
+// DEPENDENCIES IMPORTATIONS
 import axios from "axios";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
-// UTILS FUNCTIONS IMPORTATION
+// UTILS FUNCTIONS IMPORTATIONS
+import { server } from "../../tools";
 import redirect from "../../utils/redirect";
-// COMPONENTS IMPORTATION
+// COMPONENTS IMPORTATIONS
 import Navbar from "../../component/layout/navbar/navbar";
 import CatalogCard from "../../component/card/catalogCard";
 import Loader from "../../component/loader";
 import CatalogMap from "../../component/map/catalogMap";
-// STYLED COMPONENTS IMPORTATION
-import GreenTitleItalic from "../../component/layout/title/GreenTitleItalic";
+// STYLED COMPONENTS IMPORTATIONS
 import GreenRoundedButton from "../../component/layout/button/GreenRoundedButton";
 import GreySmallText from "../../component/text/GreySmallText";
+import GreenTitle from "../../component/layout/title/GreenTitle";
 
 const Flexbox = styled.div`
     margin: 2rem 1rem 1rem 1rem;
@@ -58,13 +59,30 @@ const ButtonContainer = styled.div`
     margin: 0.5rem;
 `;
 
+const CardContainer = styled.div``;
+
 const DetailsContainer = styled.div`
     margin: 1rem 1rem 1rem 1rem;
     padding: 1rem;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    display: flex;
+    align-items: center;
 `;
 
-const CardContainer = styled.div`
+const TextContainer = styled.div`
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
+
+const ImageContainer = styled.div`
+    flex: 1;
+    background: yellow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 const Catalog = () => {
@@ -122,17 +140,22 @@ const Catalog = () => {
             {
                 isShow && (
                     <DetailsContainer>
-                        <GreenTitleItalic>{selectedProduct.title}</GreenTitleItalic>
-                        <GreySmallText>Description : {selectedProduct.description}</GreySmallText>
-                        <GreySmallText>Catégorie : {selectedProduct.category}</GreySmallText>
-                        <GreySmallText>État : {selectedProduct.status}</GreySmallText>
-                        <GreySmallText>Début de disponibilité : {moment(selectedProduct.startDate).format("LL")}</GreySmallText>
-                        <GreySmallText>Fin de disponibilité : {moment(selectedProduct.endDate).format("LL")}</GreySmallText>
+                        <ImageContainer>
+                            Image à ajouter ici
+                        </ImageContainer>
+                        <TextContainer>
+                            <GreenTitle>{selectedProduct.title}</GreenTitle>
+                            <GreySmallText>Description : {selectedProduct.description}</GreySmallText>
+                            <GreySmallText>Catégorie : {selectedProduct.category}</GreySmallText>
+                            <GreySmallText>État : {selectedProduct.status}</GreySmallText>
+                            <GreySmallText>Début de disponibilité : {moment(selectedProduct.startDate).format("LL")}</GreySmallText>
+                            <GreySmallText>Fin de disponibilité : {moment(selectedProduct.endDate).format("LL")}</GreySmallText>
+                        </TextContainer>
                     </DetailsContainer>
                 )
             }
             <ContactContainer>
-                <GreenTitleItalic>Vous n avez pas encore trouvé votre bonheur ?</GreenTitleItalic>
+                <GreenTitle>Vous n avez pas encore trouvé votre bonheur ?</GreenTitle>
                 <GreySmallText>Écrivez-nous en détaillant votre recherche, nous sourçons pour vous !</GreySmallText>
                 <ButtonContainer>
                     <GreenRoundedButton

@@ -1,13 +1,11 @@
-import { useState } from "react";
 import styled from "styled-components";
-// COMPONENTS IMPORTATION
+// COMPONENTS IMPORTATIONS
+import GreenTitle from "../layout/title/GreenTitle";
 import GreenRoundedButton from "../layout/button/GreenRoundedButton";
-import GreenTitleItalic from "../layout/title/GreenTitleItalic";
 
 const Container = styled.div`
     margin: 1rem;
     display: flex;
-    justify-content: space-around;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 
     :hover {
@@ -22,6 +20,7 @@ const ImageContainer = styled.div`
     align-items: center;
     padding: 0.5rem;
     margin: 1rem;
+    flex: 1;
 `;
 
 const InfoContainer = styled.div`
@@ -29,6 +28,7 @@ const InfoContainer = styled.div`
     flex-direction: column;
     padding: 0.5rem;
     margin: 1rem;
+    flex: 2;
 `;
 
 const Item = styled.div`
@@ -40,18 +40,17 @@ const ButtonContainer = styled.div`
     justify-content: center;
     align-items: center;
     margin: 1rem;
+    flex: 1;
 `;
 
 const CatalogCard = (props) => {
-    const [isShow, setIsShow] = useState(props.isShow);
-
     return (
         <Container>
             <ImageContainer>
                 image à ajouter ici
             </ImageContainer>
             <InfoContainer>
-                <GreenTitleItalic textAlign="center">{props.title}</GreenTitleItalic>
+                <GreenTitle textAlign="center">{props.title}</GreenTitle>
                 <Item>
                     Category : {props.category}
                 </Item>
@@ -62,11 +61,11 @@ const CatalogCard = (props) => {
                     État : {props.status}
                 </Item>
             </InfoContainer>
-{/*             <ButtonContainer>
+             <ButtonContainer>
                 <GreenRoundedButton width="5rem" onClick={() => props.setIsShow(!props.isShow)}>
                     Voir plus
                 </GreenRoundedButton>
-            </ButtonContainer> */}
+            </ButtonContainer> 
         </Container>
     );
 };
