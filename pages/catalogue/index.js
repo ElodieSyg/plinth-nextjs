@@ -129,7 +129,6 @@ const Catalog = () => {
             </Head>
 
             <Navbar />
-
             <Flexbox>
                 <div>
                     <FilterBar

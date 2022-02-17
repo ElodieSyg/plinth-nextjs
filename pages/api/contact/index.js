@@ -1,4 +1,4 @@
-import nodemaileur from "nodemailer";
+import nodemailer from "nodemailer";
 import dbConnect from "../../../lib/dbConnect";
 
 export default function handle(req, res) {
@@ -21,7 +21,6 @@ export default function handle(req, res) {
 
 const postContact = async (req, res) => {
     const { name, email, phoneNumber, message } = req.body;
-    console.log("name", name, "email", email, "phoneNumber", phoneNumber, "message", message);
 
     try {
         const contactEmail = nodemailer.createTransport({

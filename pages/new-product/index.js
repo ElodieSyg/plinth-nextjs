@@ -56,6 +56,7 @@ const NewProduct = () => {
     const [locationPostalCode, setLocationPostaleCode] = useState();
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
+    const [image, setImage] = useState();
     const [selectedCategory, setSelectedCategory] = useState();
     const [selectedStatus, setSelectedStatus] = useState();
 
@@ -89,8 +90,10 @@ const NewProduct = () => {
             },
             { withCredentials: true })
             .then(res => {
-                if (res.data.status === "Success") {
-                    redirect("/catalogue");
+                if (res.data.status === "Success" && image) {
+                    setTimeout(() => {
+                        handleImage(res.data.product._id);
+                    });
                 };
             });
     };
@@ -99,6 +102,20 @@ const NewProduct = () => {
         return (
             <Loader />
         );
+    };
+
+    const handleImage = (id) => {
+        let formData = new FormData();
+        formData.append("file", image);
+
+        const fetch = async () => {
+            await axios.patch(`${server}/api/picture`, { id }, { withCredentials: true })
+                .then(res => {
+                    console.log("hey")
+                    console.log("result in handle image", res);
+                });
+        };
+        fetch();
     };
 
     return (
@@ -183,6 +200,12 @@ const NewProduct = () => {
                         <StyledInput
                             type="date"
                             onChange={e => setEndDate(e.target.value)} />
+                    </Item>
+                    <Item>
+                        <Label>Séléctionnez une image</Label>
+                        <StyledInput
+                            type="file"
+                            onChange={e => setImage(e.target.files[0])} />
                     </Item>
                     <Item>
                         <GreenRoundedButton onClick={handleSend}>Déposez votre annonce</GreenRoundedButton>
