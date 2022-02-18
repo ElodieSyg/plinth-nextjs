@@ -1,7 +1,8 @@
-import { useState } from "react";
-import { getSession, signIn, useSession } from "next-auth/react";
+import { useState, useEffect } from "react";
+import { getProviders, getSession, signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import Image from "next/image";
 import styled from "styled-components";
 // UTILS FUNCTIONS
 import redirect from "../../utils/redirect";
@@ -24,7 +25,7 @@ const LoginContainer = styled.div`
     };
 `;
 
-const Item = styled.div`
+const LoginItem = styled.div`
     margin: 0.5rem;
 `;
 
@@ -35,19 +36,26 @@ const ButtonContainer = styled.div`
     margin: 0.5rem;
 `;
 
-const Login = () => {
+const ProviderContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+const ProviderItem = styled.div`
+    margin: 0.2rem
+`;
+
+const Login = ({ providers }) => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
-    const { status, loading } = useSession();
+    const { data: session, status } = useSession();
     const Router = useRouter();
 
     const preventDefault = (e) => {
         e.preventDefault();
     };
 
-/*     if (status === "authenticated") {
-        Router.push("/dashboard");
-    }; */
 
     return (
         <>
@@ -59,45 +67,63 @@ const Login = () => {
             <GlobalContainer>
                 <LoginContainer onSubmit={(e) => preventDefault(e)}>
                     <GreenTitle>Connexion</GreenTitle>
-                    <Item>
+                    <LoginItem>
                         <BasicInput
                             type="text"
                             placeholder="Email"
                             name="email"
                             onChange={(e) => setEmail(e.target.value)} />
-                    </Item>
-                    <Item>
+                    </LoginItem>
+                    <LoginItem>
                         <BasicInput
                             type="password"
                             placeholder="Password"
                             name="password"
                             onChange={(e) => setPassword(e.target.value)} />
-                    </Item>
+                    </LoginItem>
                     <ButtonContainer>
-                        <Item>
+                        <LoginItem>
                             <GreenButton onClick={() => signIn()}>Se connecter</GreenButton>
-                        </Item>
+                        </LoginItem>
                         <p>ou</p>
-                        <Item >
+                        <LoginItem >
                             <WhiteButton onClick={() => redirect("/register")}>Créer un compte</WhiteButton>
-                        </Item>
+                        </LoginItem>
                     </ButtonContainer>
+                    <p>ou</p>
+                    <GreenTitle>Connectez-vous avec</GreenTitle>
+                    {
+                        Object.values(providers).slice(1).map(provider => (
+                            <ProviderItem key={provider.name}>
+                                <WhiteButton onClick={() => signIn(provider.id, {
+                                    callbackUrl: "/new-product"
+                                })}>
+                                    <ProviderContainer>
+                                        <ProviderItem>
+                                            <Image src={`/${provider.name.toLowerCase()}.png`} alt="google_logo" height={20} width={20} />
+                                        </ProviderItem>
+                                        <ProviderItem>
+                                            <p>{provider.name}</p>
+                                        </ProviderItem>
+                                    </ProviderContainer>
+                                </WhiteButton>
+                            </ProviderItem>
+                        ))
+                    }
                 </LoginContainer>
             </GlobalContainer>
         </>
     );
 };
-/* 
-// SESSION IS NULL OR UNDEFINED, WE HAVE TO CREATE OWN GETSESSION  !!!! //
-export async function getServerSideProps({ req }) {
-    const session = await getSession({ req });
-    console.log(session, "in server side props")
+
+export async function getServerSideProps() {
+    const providers = await getProviders();
 
     return {
         props: {
-            session,
+            providers,
         },
     };
 };
- */
+
 export default Login;

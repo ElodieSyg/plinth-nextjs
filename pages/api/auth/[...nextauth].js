@@ -1,10 +1,13 @@
-import NextAuth from "next-auth";
-import CredentialProvider from "next-auth/providers/credentials";
-import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import mongoClient from '../../../lib/mongoDb';
 import dbConnect from "../../../lib/dbConnect";
+// DEPENDENCIES IMPORTATIONS
+import NextAuth from "next-auth";
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+// PROVIDERS
+import CredentialProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 // MODELS IMPORTATIONS
 import User from "../../../model/User";
 import Session from "../../../model/Session";
@@ -26,13 +29,10 @@ export default NextAuth({
                 password: { label: "Password", type: "password" },
             },
             async authorize(credentials) {
-                console.log("inside authorize");
                 try {
                     dbConnect();
-                    console.log("connexion to database")
 
                     const user = await User.findOne({ email: credentials.email });
-                    console.log("user in authorize", user);
 
 
                     if (!user) {
@@ -40,7 +40,6 @@ export default NextAuth({
                     };
 
                     const checkPassword = await bcrypt.compare(credentials.password, user.password);
-                    console.log("check if password is valid", checkPassword);
 
                     if (!checkPassword) {
                         throw new Error("Incorrect Credentials");
@@ -51,14 +50,12 @@ export default NextAuth({
                         process.env.JWT_SECRET,
                         { expiresIn: "24h" },
                     );
-                    console.log("token", token)
 
                     const newSession = await Session.create({
                         email: credentials.email,
                         token,
                         userId: user._id,
                     });
-                    console.log("session in authorize", newSession);
 
                     return user
                 }
@@ -67,29 +64,27 @@ export default NextAuth({
                 };
             },
         }),
+        GoogleProvider({
+            clientId: process.env.GOOGLE_ID,
+            clientSecret: process.env.GOOGLE_SECRET,
+        }),
     ],
     callbacks: {
-        async jwt({ token, user }) {
-            console.log("inside jwt callback");
-            if (user) {
-                token.id = user.id;
+        async jwt({ token, account }) {
+            if (account) {
+                token.accessToken = account.access_token
             };
             return token;
         },
         async session({ session, user }) {
-            console.log("inside session callback");
             if (token) {
                 session.id = token.id;
+                session.accessToken = token.accessToken;
             };
             return session
         },
         async signIn(user, account, profile) {
-            console.log("inside signIn callback");
-            console.log("user :", user);
-            console.log("profile :", profile);
-            console.log("account :", account);
             if (user && user.isActive === "1") {
-                console.log("User is connected");
                 return user;
             } else {
                 return false;
@@ -102,7 +97,7 @@ export default NextAuth({
         encryption: true,
     },
     pages: {
-        // signIn: "/",
+        signIn: "/",
         // signOut: "/auth/logout",
         // error: "/auth/error",
         // newUser: "/auth/new-user",

@@ -15,14 +15,14 @@ export default function MyApp({ Component, pageProps }) {
     <SessionProvider session={pageProps.session}>
       <UserProvider>
         <LocationProvider>
-          {/*       {Component.auth ? ( */}
-          {/*           <Auth>
- */}            <Component {...pageProps} />
-          {/*           </Auth>
- */}{/*         ) : (
-   */}          {/* <Component {...pageProps} /> */}
-          {/*         )}
- */}      </LocationProvider>
+          {Component.auth ? (
+            <Auth>
+              <Component {...pageProps} />
+            </Auth>
+          ) : (
+            <Component {...pageProps} />
+          )}
+        </LocationProvider>
       </UserProvider>
     </SessionProvider>
   );
