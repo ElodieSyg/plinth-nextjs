@@ -59,6 +59,8 @@ const NewProduct = () => {
     const [image, setImage] = useState();
     const [selectedCategory, setSelectedCategory] = useState();
     const [selectedStatus, setSelectedStatus] = useState();
+    const [data, setData] = useState();
+    const [id, setId] = useState();
 
     useEffect(() => {
         axios.get(`${server}/api/category`, { withCredentials: true })
@@ -72,7 +74,7 @@ const NewProduct = () => {
             });
     }, []);
 
-    const handleSend = () => {
+    const handlesend = async () => {
         axios.post(`${server}/api/product`,
             {
                 title,
@@ -90,7 +92,8 @@ const NewProduct = () => {
             },
             { withCredentials: true })
             .then(res => {
-                if (res.data.status === "Success" && image) {
+                if (res.data.status === "Success") {
+                    console.log(res)
                     setTimeout(() => {
                         handleImage(res.data.product._id);
                     });
@@ -98,24 +101,26 @@ const NewProduct = () => {
             });
     };
 
+    const handleImage = async id => {
+        const filedata = new FormData();
+        filedata.append("toto", image);
+
+        const config = {
+            headers: { 'content-type': 'multipart/form-data', "id": id },
+            onUploadProgress: (event) => {
+                console.log(`Current progress:`, Math.round((event.loaded * 100) / event.total));
+            },
+        };
+
+        const response = await axios.post(`${server}/api/uploads`, filedata, config);
+        console.log(response.data);
+    };
+
+
     if (!categories || !status) {
         return (
             <Loader />
         );
-    };
-
-    const handleImage = (id) => {
-        let formData = new FormData();
-        formData.append("file", image);
-
-        const fetch = async () => {
-            await axios.patch(`${server}/api/picture`, { id }, { withCredentials: true })
-                .then(res => {
-                    console.log("hey")
-                    console.log("result in handle image", res);
-                });
-        };
-        fetch();
     };
 
     return (
@@ -204,18 +209,17 @@ const NewProduct = () => {
                     <Item>
                         <Label>Séléctionnez une image</Label>
                         <StyledInput
-                            type="file"
-                            onChange={e => setImage(e.target.files[0])} />
+                            name="toto"
+                            onChange={(e) => setImage(e.target.files[0])}
+                            type="file" />
                     </Item>
                     <Item>
-                        <GreenRoundedButton onClick={handleSend}>Déposez votre annonce</GreenRoundedButton>
+                        <GreenRoundedButton onClick={handlesend}>Déposez votre annonce</GreenRoundedButton>
                     </Item>
                 </FormContainer>
             </Container>
         </>
     );
 };
-
-// NewProduct.auth = true;
 
 export default NewProduct;

@@ -1,15 +1,19 @@
 import mongoose from "mongoose";
 
 const ProductSchema = new mongoose.Schema({
-/*     userId: {
-        type: mongoose.Schema.Types.ObjectId, ref: "user",
-        required: false,
+    /*     userId: {
+            type: mongoose.Schema.Types.ObjectId, ref: "user",
+            required: false,
+        },
+     */
+    postedAt : {
+        type: Date, required: true
     },
- */    title: {
+    title: {
         type: String,
         required: true,
     },
-     category: {
+    category: {
         type: mongoose.Schema.Types.ObjectId, ref: "category",
         required: true
     },
@@ -47,7 +51,7 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         default: "",
     },
- });
+});
 
 module.exports =
     mongoose.models.Product || mongoose.model("Product", ProductSchema);

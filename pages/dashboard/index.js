@@ -1,7 +1,54 @@
+import { useEffect, useState } from "react";
 import Head from "next/head";
+// DEPENDENCIES IMPORTATIONS
+import styled from "styled-components";
+import axios from "axios";
+// UTILS FUNCTIONS IMPORTATIONS
+import { server } from "../../tools";
+import redirect from "../../utils/redirect";
+// COMPONENTS IMPORTATIONS
 import Navbar from "../../component/layout/navbar/navbar";
+import DashboardCard from "../../component/card/dashboardCard";
+import ManagementCard from "../../component/card/managementCard";
+import Loader from "../../component/loader";
+// STYLED COMPONENTS IMPORTATIONS
+import GreyTitle from "../../component/layout/title/GreyTitle";
+
+const Container = styled.div`
+    margin: 1rem 4rem 2rem 4rem;
+`;
+
+const TitleContainer = styled.div`
+    padding: 2rem;
+    text-align: center;
+`;
+
+const CardContainer = styled.div`
+    display: flex;
+    justify-content: space-around;
+`;
+
+const ManagementContainer = styled.div`
+    background: yellow;
+    margin: 2rem;
+`;
 
 const Dashboard = () => {
+    const [products, setProducts] = useState(null);
+
+    useEffect(() => {
+        axios.get(`${server}/api/product`, { withCredentials: true })
+            .then(res => {
+                setProducts(res.data.products)
+            })
+    }, []);
+
+    if (!products) {
+        return (
+            <Loader />
+        );
+    };
+
     return (
         <>
             <Head>
@@ -9,7 +56,39 @@ const Dashboard = () => {
             </Head>
 
             <Navbar />
-            Dashboard
+            <Container>
+                <TitleContainer>
+                    <GreyTitle>Bienvenue sur votre tableau de bord</GreyTitle>
+                </TitleContainer>
+                <CardContainer>
+                    <DashboardCard
+                        count={2}
+                        source="/favorite.png"
+                        alt="favorite image"
+                        onClick={() => redirect("/favorites")}
+                        description="Vos favoris" />
+                    <DashboardCard
+                        count="+1"
+                        source="/add.png"
+                        alt="add new image"
+                        description="Déposer une nouvelle annonce"
+                        onClick={() => redirect("/new-product")} />
+                    <DashboardCard
+                        count={13}
+                        source="/onlinead.png"
+                        alt="online announce image"
+                        description="Vos annonces" />
+                </CardContainer>
+                <ManagementContainer>
+                    {
+                        products.map(product => (
+                            <ManagementCard 
+                                key={product._id}
+                                title={product.title} />
+                        ))
+                    }
+                </ManagementContainer>
+            </Container>
         </>
     );
 };

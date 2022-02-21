@@ -69,8 +69,9 @@ const getProduct = async (req, res) => {
 
 const postProduct = async (req, res) => {
     const { title, category, description, status, location, coordinate, startDate, endDate } = req.body;
+
     try {
-        const product = await Product.create({ title, category, description, status, location, startDate, endDate });
+        const product = await Product.create({ postedAt: new Date(), title, category, description, status, location, startDate, endDate });
         return res.status(201).json({
             status: "Success",
             message: "Product succefully created",

@@ -43,7 +43,7 @@ const ButtonContainer = styled.div`
     flex: 1;
 `;
 
-const CatalogCard = (props) => {
+const CatalogCard = props => {
     return (
         <Container>
             <ImageContainer>
