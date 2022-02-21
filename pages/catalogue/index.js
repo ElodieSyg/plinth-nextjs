@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
+import Image from "next/image";
 // DEPENDENCIES IMPORTATIONS
 import axios from "axios";
 import styled from "styled-components";
@@ -78,7 +79,6 @@ const TextContainer = styled.div`
 
 const ImageContainer = styled.div`
     flex: 1;
-    background: yellow;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -151,6 +151,7 @@ const Catalog = () => {
                                             status={product.status}
                                             isShow={isShow}
                                             setIsShow={setIsShow}
+                                            source={product.image}
                                         />
                                     </div>
                                 ))
@@ -166,6 +167,7 @@ const Catalog = () => {
                                             status={product.status}
                                             isShow={isShow}
                                             setIsShow={setIsShow}
+                                            source={product.image}
                                         />
                                     </div>
                                 ))
@@ -180,7 +182,7 @@ const Catalog = () => {
                 isShow && (
                     <DetailsContainer>
                         <ImageContainer>
-                            Image à ajouter ici
+                            <Image src={`${server}/${selectedProduct.image}`} alt={selectedProduct.title} width={150} height={150} />
                         </ImageContainer>
                         <TextContainer>
                             <GreenTitle>{selectedProduct.title}</GreenTitle>

@@ -1,8 +1,13 @@
+import Image from "next/image";
+// UTILS IMPORTATIONS
+import { server } from "../../tools";
+// DEPENDENCIES IMPORTATIONS
 import styled from "styled-components";
 // COMPONENTS IMPORTATION
 import GreenRoundedButton from "../layout/button/GreenRoundedButton";
 import GreenTitleItalic from "../layout/title/GreenTitleItalic";
 
+console.log(server)
 const Container = styled.div`
     margin: 1rem;
     display: flex;
@@ -16,7 +21,6 @@ const Container = styled.div`
 `;
 
 const ImageContainer = styled.div`
-    background: yellow;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,6 +37,7 @@ const InfoContainer = styled.div`
 const Item = styled.div`
    display: flex;
    justify-content: center;
+   margin: 1rem;
 `;
 
 const ButtonContainer = styled.div`
@@ -46,17 +51,16 @@ const HomeCard = (props) => {
     return (
         <Container>
             <ImageContainer>
-                image à ajouter ici
+                <Image src={`${server}/${props.source}`} alt={props.title} width={150} height={150} />
             </ImageContainer>
             <InfoContainer>
-                <GreenTitleItalic textAlign="center">{props.title}</GreenTitleItalic>
+                <Item>
+                    <GreenTitleItalic textAlign="center">{props.title}</GreenTitleItalic>
+                </Item>
                 <Item>
                     {props.description}
                 </Item>
             </InfoContainer>
-            <ButtonContainer>
-                <GreenRoundedButton width="5rem">Voir plus</GreenRoundedButton>
-            </ButtonContainer>
         </Container>
     );
 };

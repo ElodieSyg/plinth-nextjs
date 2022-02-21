@@ -82,7 +82,8 @@ const Home = () => {
             <HomeCard
               key={uuidv4()}
               title={product.title}
-              description={product.description} />
+              description={product.description}
+              source={product.image} />
           ))
         }
       </CardContainer>

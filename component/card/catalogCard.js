@@ -1,3 +1,7 @@
+import Image from "next/image";
+// UTILS IMPORTATIONS
+import { server } from "../../tools";
+// DEPENDENCIES IMPORTATION
 import styled from "styled-components";
 // COMPONENTS IMPORTATIONS
 import GreenTitle from "../layout/title/GreenTitle";
@@ -14,7 +18,6 @@ const Container = styled.div`
 `;
 
 const ImageContainer = styled.div`
-    background: yellow;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -47,7 +50,7 @@ const CatalogCard = props => {
     return (
         <Container>
             <ImageContainer>
-                image à ajouter ici
+                <Image src={`${server}/${props.source}`} alt={props.title} width={150} height={150} />
             </ImageContainer>
             <InfoContainer>
                 <GreenTitle textAlign="center">{props.title}</GreenTitle>
@@ -61,11 +64,11 @@ const CatalogCard = props => {
                     État : {props.status}
                 </Item>
             </InfoContainer>
-             <ButtonContainer>
+            <ButtonContainer>
                 <GreenRoundedButton width="5rem" onClick={() => props.setIsShow(!props.isShow)}>
                     Voir plus
                 </GreenRoundedButton>
-            </ButtonContainer> 
+            </ButtonContainer>
         </Container>
     );
 };

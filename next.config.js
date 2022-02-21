@@ -1,6 +1,6 @@
 module.exports = {
   reactStrictMode: true,
-  api: {
-    bodyParser: false,
+  images: {
+    domains: ['localhost:3000'],
   },
 }
