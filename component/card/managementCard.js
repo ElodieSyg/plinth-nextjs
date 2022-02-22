@@ -99,7 +99,6 @@ const ManagementContainer = props => {
 
     const handleDelete = () => {
         setId(props.products._id)
-        console.log(id);
 
         axios.delete(`${server}/api/product/${id}`, { withCredentials: true })
             .then(res => {

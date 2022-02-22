@@ -7,6 +7,5 @@ export const refresh = () => {
             if (res.data.status === "Success") {
                 window.location.reload();
             };
-            console.log("An error happened");
         });
 };
