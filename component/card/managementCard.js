@@ -97,12 +97,12 @@ const ManagementContainer = props => {
             });
     };
 
-    const handleDelete = () => {
+    const handleDelete = async () => {
         setId(props.products._id)
 
-        axios.delete(`${server}/api/product/${id}`, { withCredentials: true })
+        await axios.delete(`${server}/api/product/${id}`, { withCredentials: true })
             .then(res => {
-                refresh;
+                refresh();
             });
     };
 

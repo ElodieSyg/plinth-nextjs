@@ -48,7 +48,7 @@ const patchProduct = async (req, res) => {
     try {
         const product = await Product.findByIdAndUpdate({ _id: id[0] }, { title, description, category, status, startDate, endDate });
 
-        if (!product) throw new Error ("Product not found");
+        if (!product) throw new Error("Product not found");
 
         return res.status(200).json({
             status: "Success",
@@ -59,8 +59,8 @@ const patchProduct = async (req, res) => {
             res.status(404).json({
                 status: "Fail",
                 message: error,
-            })
-        }
+            });
+        };
         return res.status(500).json({
             status: "Fail",
             message: "Internal Server Error",
@@ -70,14 +70,23 @@ const patchProduct = async (req, res) => {
 
 const deleteProduct = async (req, res) => {
     const { id } = req.query;
-    console.log("id", id)
 
     try {
+        const product = await Product.findByIdAndDelete({ _id: id[0] });
+
+        if (!product) throw new Error("Product not found");
+
         return res.status(200).json({
             status: "Success",
             message: "Product succefully deleted",
         });
     } catch (error) {
+        if (error === "Product not found") {
+            res.status(404).json({
+                status: "Fail",
+                message: error,
+            });
+        };
         return res.status(500).json({
             status: "Fail",
             message: "Internal Server Error",
