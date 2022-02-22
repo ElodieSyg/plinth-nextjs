@@ -7,7 +7,7 @@ const GreenRoundedButton = (props) => {
         color: #FFFFFF;
         border-radius: 999px;
         width: ${props.width};
-        height: 2.5rem;
+        height: 2.4rem;
         cursor: pointer;
     
         :hover {

@@ -44,6 +44,7 @@ const getProduct = async (req, res) => {
                 startDate: products[i].startDate,
                 endDate: products[i].endDate,
                 image: products[i].image,
+                _id: products[i]._id,
             };
 
             newFormat.push(data);

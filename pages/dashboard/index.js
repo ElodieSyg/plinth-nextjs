@@ -29,21 +29,42 @@ const CardContainer = styled.div`
 `;
 
 const ManagementContainer = styled.div`
-    background: yellow;
-    margin: 2rem;
+    margin: 1rem;
+`;
+
+const Management = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 3px solid #F7F9F8;
+    border-radius: 30px;
+
 `;
 
 const Dashboard = () => {
     const [products, setProducts] = useState(null);
+    const [categories, setCategories] = useState();
+    const [status, setStatus] = useState();
 
     useEffect(() => {
         axios.get(`${server}/api/product`, { withCredentials: true })
             .then(res => {
                 setProducts(res.data.products)
-            })
+            });
+
+        axios.get(`${server}/api/category`, { withCredentials: true })
+            .then(res => {
+                setCategories(res.data.categories);
+            });
+
+        axios.get(`${server}/api/status`, { withCredentials: true })
+            .then(res => {
+                console.log(res)
+                setStatus(res.data.data);
+            });
     }, []);
 
-    if (!products) {
+    if (!products || !categories || !status) {
         return (
             <Loader />
         );
@@ -80,11 +101,16 @@ const Dashboard = () => {
                         description="Vos annonces" />
                 </CardContainer>
                 <ManagementContainer>
+                    <TitleContainer>
+                        <GreyTitle>Gérez vos annonces</GreyTitle>
+                    </TitleContainer>
                     {
                         products.map(product => (
-                            <ManagementCard 
+                            <ManagementCard
                                 key={product._id}
-                                title={product.title} />
+                                products={product}
+                                categories={categories}
+                                status={status} />
                         ))
                     }
                 </ManagementContainer>

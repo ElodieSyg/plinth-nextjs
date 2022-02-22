@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getProviders, getSession, signIn, useSession } from "next-auth/react";
+import { getProviders, getSession, signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Image from "next/image";

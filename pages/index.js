@@ -1,19 +1,20 @@
-import { useEffect, useState, createContext } from "react";
-import { server } from "../tools";
-import axios from "axios";
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
+// UTILS IMPORTATIONS
+import { server } from "../tools";
+// DEPENDENCIES IMPORTATIONS
+import axios from "axios";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
-// COMPONENTS IMPORTATION
+// COMPONENTS IMPORTATIONS
 import Navbar from "../component/layout/navbar/navbar";
 import HomeCard from "../component/card/homeCard";
 import Loader from "../component/loader";
-// STYLED COMPONENTS IMPORTATION
+// STYLED COMPONENTS IMPORTATIONS
 import BlackTitle from "../component/layout/title/BlackTitle";
 import GlobalContainer from "../styles/styled-components/container/GlobalContainer";
-// CONTEXT
-import GreenRoundedButton from "../component/layout/button/GreenRoundedButton";
 
 const AboutContainer = styled.div`
   display: flex;
@@ -40,6 +41,8 @@ const GreySmallText = styled.p`
 
 const Home = () => {
   const [products, setProducts] = useState();
+  const {data: session, status} = useSession();
+  console.log("session", session, "status", status);
 
   useEffect(() => {
     axios.get(`${server}/api/product`, { withCredentials: true })

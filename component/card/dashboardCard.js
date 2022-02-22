@@ -12,7 +12,7 @@ const DashboardCard = props => {
         align-items: center;
         cursor: ${props.onClick && "pointer"};
         border: 3px solid #F7F9F8;
-        border-radius: 30px;
+        border-radius: 10px;
     
         :hover {
             background: #F7F9F8;
