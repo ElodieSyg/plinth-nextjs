@@ -21,6 +21,7 @@ export default NextAuth({
         maxAge: 15 * 24 * 60 * 60,
         updateAge: 12 * 60 * 60,
     },
+    secret: process.env.SECRET,
     providers: [
         CredentialProvider({
             name: "credentials",
@@ -97,7 +98,7 @@ export default NextAuth({
         encryption: true,
     },
     pages: {
-        signIn: "/",
+        signIn: "/auth/signin",
         // signOut: "/auth/logout",
         // error: "/auth/error",
         // newUser: "/auth/new-user",

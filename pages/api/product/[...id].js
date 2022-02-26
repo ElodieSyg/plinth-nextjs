@@ -44,7 +44,6 @@ const getProduct = async (req, res) => {
 const patchProduct = async (req, res) => {
     const { id } = req.query;
     const { title, description, category, status, startDate, endDate } = req.body;
-
     try {
         const product = await Product.findByIdAndUpdate({ _id: id[0] }, { title, description, category, status, startDate, endDate });
 
@@ -70,7 +69,6 @@ const patchProduct = async (req, res) => {
 
 const deleteProduct = async (req, res) => {
     const { id } = req.query;
-
     try {
         const product = await Product.findByIdAndDelete({ _id: id[0] });
 

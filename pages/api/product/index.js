@@ -45,6 +45,7 @@ const getProduct = async (req, res) => {
                 endDate: products[i].endDate,
                 image: products[i].image,
                 _id: products[i]._id,
+                coordinate: products[i].coordinate,
             };
 
             newFormat.push(data);
@@ -73,7 +74,7 @@ const postProduct = async (req, res) => {
     const { title, category, description, status, location, coordinate, startDate, endDate } = req.body;
 
     try {
-        const product = await Product.create({ postedAt: new Date(), title, category, description, status, location, startDate, endDate });
+        const product = await Product.create({ postedAt: new Date(), title, category, description, status, location, coordinate, startDate, endDate });
         return res.status(201).json({
             status: "Success",
             message: "Product succefully created",

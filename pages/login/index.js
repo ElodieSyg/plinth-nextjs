@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getProviders, getSession, signIn, signOut, useSession } from "next-auth/react";
+import { getProviders, signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Image from "next/image";
@@ -95,9 +95,7 @@ const Login = ({ providers }) => {
                     {
                         Object.values(providers).slice(1).map(provider => (
                             <ProviderItem key={provider.name}>
-                                <WhiteButton onClick={() => signIn(provider.id, {
-                                    callbackUrl: "/new-product"
-                                })}>
+                                <WhiteButton onClick={() => signIn(provider.id)}>
                                     <ProviderContainer>
                                         <ProviderItem>
                                             <Image src={`/${provider.name.toLowerCase()}.png`} alt="google_logo" height={20} width={20} />

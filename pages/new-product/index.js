@@ -59,8 +59,6 @@ const NewProduct = () => {
     const [image, setImage] = useState();
     const [selectedCategory, setSelectedCategory] = useState();
     const [selectedStatus, setSelectedStatus] = useState();
-    const [data, setData] = useState();
-    const [id, setId] = useState();
 
     useEffect(() => {
         axios.get(`${server}/api/category`, { withCredentials: true })
@@ -75,6 +73,25 @@ const NewProduct = () => {
     }, []);
 
     const handlesend = async () => {
+        let coordinate = {};
+        let location = {
+            number: locationNumber,
+            address: locationAddress,
+            city: locationCity,
+            postalCode: locationPostalCode
+        };
+
+        const fetchCoordinate = await fetch(`http://api.positionstack.com/v1/forward?access_key=b5b5f521a5d082451b0e8b8f7c34e9f1&query=${locationNumber}%20${locationAddress}%20${locationPostalCode}%20${locationCity}`);
+        const res = await fetchCoordinate.json();
+        const data = await res.data[0];
+
+        coordinate = {
+            latitude: data.latitude.toString(),
+            longitude: data.longitude.toString(),
+        };
+
+        console.log("coordinate", coordinate);
+
         axios.post(`${server}/api/product`,
             {
                 title,
@@ -87,13 +104,17 @@ const NewProduct = () => {
                     city: locationCity,
                     postalCorde: locationPostalCode,
                 },
+                coordinate: {
+                    latitude: coordinate.latitude,
+                    longitude: coordinate.longitude,
+                },
                 startDate,
                 endDate,
             },
             { withCredentials: true })
             .then(res => {
                 if (res.data.status === "Success") {
-                    console.log(res)
+                    console.log("result post", res)
                     setTimeout(() => {
                         handleImage(res.data.product._id);
                     });

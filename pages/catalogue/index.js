@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Head from "next/head";
 import Image from "next/image";
 // DEPENDENCIES IMPORTATIONS
@@ -19,9 +19,16 @@ import FilterBar from "../../component/filterBar";
 import GreenRoundedButton from "../../component/layout/button/GreenRoundedButton";
 import GreySmallText from "../../component/text/GreySmallText";
 import GreenTitle from "../../component/layout/title/GreenTitle";
+// CONTEXTS IMPORTATIONS
+import { LocationContext } from "../../context/LocationContext";
 
-const Flexbox = styled.div`
+const Container = styled.div`
     margin: 2rem 1rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+`;
+
+const MapProductContent = styled.div`
     display: flex;
 `;
 
@@ -34,7 +41,6 @@ const ProductContainer = styled.div`
     height: 25rem;
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
-    cursor: pointer;
 `;
 
 const MapContainer = styled.div`
@@ -42,8 +48,6 @@ const MapContainer = styled.div`
     justify-content: center;
     align-items: center;
     flex: 1;
-    height: 384px;
-    width: 640px;
     background: red;
 `;
 
@@ -92,6 +96,7 @@ const Catalog = () => {
     const [filter, setFilter] = useState(false);
     const [isFilter, setIsFilter] = useState(false);
     const [data, setData] = useState([]);
+    const { position, setPosition } = useContext(LocationContext);
 
     useEffect(() => {
         axios.get(`${server}/api/product`, { withCredentials: true })
@@ -103,6 +108,7 @@ const Catalog = () => {
     const handleClickInfo = (product) => {
         setIsShow(!isShow);
         setSelectedProduct(product);
+        setPosition([product.coordinate.latitude, product.coordinate.longitude])
     };
 
     const searchText = (e) => {
@@ -129,20 +135,18 @@ const Catalog = () => {
             </Head>
 
             <Navbar />
-            <Flexbox>
-                <div>
-                    <FilterBar
-                        placeholder="Que recherchez-vous ?"
-                        value={filter}
-                        onChange={searchText.bind(this)}
-                    />
+            <Container>
+                <FilterBar
+                    placeholder="Que recherchez-vous ?"
+                    value={filter}
+                    onChange={searchText.bind(this)}
+                />
+                <MapProductContent>
                     <ProductContainer>
                         {
                             isFilter
                                 ? data.map(product => (
-                                    <div
-                                        key={uuidv4()}
-                                        onClick={() => handleClickInfo(product)}>
+                                    <div key={uuidv4()}>
                                         <CatalogCard
                                             id={product._id}
                                             title={product.title}
@@ -152,13 +156,12 @@ const Catalog = () => {
                                             isShow={isShow}
                                             setIsShow={setIsShow}
                                             source={product.image}
+                                            handleClickInfo={() => handleClickInfo(product)}
                                         />
                                     </div>
                                 ))
                                 : products.map(product => (
-                                    <div
-                                        key={uuidv4()}
-                                        onClick={() => handleClickInfo(product)}>
+                                    <div key={uuidv4()}>
                                         <CatalogCard
                                             id={product._id}
                                             title={product.title}
@@ -168,16 +171,17 @@ const Catalog = () => {
                                             isShow={isShow}
                                             setIsShow={setIsShow}
                                             source={product.image}
+                                            handleClickInfo={() => handleClickInfo(product)}
                                         />
                                     </div>
                                 ))
                         }
                     </ProductContainer>
-                </div>
-                <MapContainer>
-                    {/* <CatalogMap /> */}
-                </MapContainer>
-            </Flexbox>
+                    <MapContainer>
+                        <CatalogMap />
+                    </MapContainer>
+                </MapProductContent>
+            </Container>
             {
                 isShow && (
                     <DetailsContainer>

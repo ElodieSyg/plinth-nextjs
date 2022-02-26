@@ -10,11 +10,20 @@ import GreenRoundedButton from "../layout/button/GreenRoundedButton";
 const Container = styled.div`
     margin: 1rem;
     display: flex;
+    flex-direction: column;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+`;
 
-    :hover {
-        background: #F7F9F8;
-    };
+const TopContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0rem 1rem 0rem 1rem;
+`;
+
+const BotContainer = styled.div`
+    display: flex;
+    align-items: center;
 `;
 
 const ImageContainer = styled.div`
@@ -46,30 +55,44 @@ const ButtonContainer = styled.div`
     flex: 1;
 `;
 
+const ImageCursor = styled.img`
+    cursor: pointer;
+`;
+
 const CatalogCard = props => {
+    const handleAddFavorites = () => {
+        console.log("Add product to favorites !");
+    };
+
     return (
         <Container>
-            <ImageContainer>
-                <Image src={`${server}/${props.source}`} alt={props.title} width={150} height={150} />
-            </ImageContainer>
-            <InfoContainer>
+            <TopContainer>
+                <div></div>
                 <GreenTitle textAlign="center">{props.title}</GreenTitle>
-                <Item>
-                    Category : {props.category}
-                </Item>
-                <Item>
-                    Description : {props.description}
-                </Item>
-                <Item>
-                    État : {props.status}
-                </Item>
-            </InfoContainer>
-            <ButtonContainer>
-                <GreenRoundedButton width="5rem" onClick={() => props.setIsShow(!props.isShow)}>
-                    Voir plus
-                </GreenRoundedButton>
-            </ButtonContainer>
-        </Container>
+                <ImageCursor src="/favorite.png" alt="favorite image" width={20} height={20} onClick={handleAddFavorites} />
+            </TopContainer>
+            <BotContainer>
+                <ImageContainer>
+                    <Image src={`${server}/${props.source}`} alt={props.title} width={150} height={150} />
+                </ImageContainer>
+                <InfoContainer>
+                    <Item>
+                        Catégorie : {props.category}
+                    </Item>
+                    <Item>
+                        Description : {props.description}
+                    </Item>
+                    <Item>
+                        État : {props.status}
+                    </Item>
+                </InfoContainer>
+                <ButtonContainer>
+                    <GreenRoundedButton width="5rem" onClick={props.handleClickInfo} /* onClick={() => props.setIsShow(!props.isShow)} */>
+                        Voir plus
+                    </GreenRoundedButton>
+                </ButtonContainer>
+            </BotContainer>
+        </Container >
     );
 };
 
