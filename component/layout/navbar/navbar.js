@@ -22,6 +22,11 @@ const NavbarContainer = styled.div`
     };
 `;
 
+const LContainer = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
 const DropdownContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -101,17 +106,19 @@ const Navbar = () => {
         return (
             <div>
                 <NavbarContainer>
-                    <Item>
-                        <Image
-                            src="/logo.png"
-                            alt="Plinth Logo"
-                            width={150}
-                            height={100}
-                            onClick={() => redirect("/")} />
-                    </Item>
-                    <Item onClick={() => redirect("/catalogue")}>
-                        <GreenSmallText>Catalogue</GreenSmallText>
-                    </Item>
+                    <LContainer>
+                        <Item>
+                            <Image
+                                src="/logo.png"
+                                alt="Plinth Logo"
+                                width={150}
+                                height={100}
+                                onClick={() => redirect("/")} />
+                        </Item>
+                        <Item onClick={() => redirect("/catalogue")}>
+                            <GreenSmallText>Catalogue</GreenSmallText>
+                        </Item>
+                    </LContainer>
                     <ButtonContainer>
                         <ButtonItem>
                             <GreenRoundedButton width="7rem" onClick={() => redirect("/login")}>Connexion</GreenRoundedButton>
