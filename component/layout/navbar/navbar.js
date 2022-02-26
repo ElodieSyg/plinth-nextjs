@@ -15,7 +15,7 @@ const NavbarContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     height: 7em;
-    box-shadow: -5px 3px 5px 5px #e5e6e6;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     padding: 0rem 0.5rem 0rem 0.5rem;
 
     @media only screen and (min-width: 768px) {

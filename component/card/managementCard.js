@@ -15,31 +15,31 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-around;
-    border: 2px solid #F7F9F8;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 30px;
     height: 100%;
     margin: 1rem;
 `;
 
 const ImageContainer = styled.div`
-width: 10%;
-display: flex;
-align-items: center;
-justify-content: center;
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 const ColumnContainer = styled.div`
-width: 15%
-display: flex;
-align-items: center;
-justify-content: center;
+    width: 15%
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 const ActionContainer = styled.div`
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 `;
 
 const OnClickItem = styled.label`
@@ -50,7 +50,7 @@ const ModificationContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 2px solid #F7F9F8;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 30px;
     height: 100%;
     margin: 1rem;

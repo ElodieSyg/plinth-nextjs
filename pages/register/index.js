@@ -17,8 +17,8 @@ const RegisterContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    
     @media only screen and (min-width: 425px) {
         padding: 1rem 3rem 3rem 3rem;
     };

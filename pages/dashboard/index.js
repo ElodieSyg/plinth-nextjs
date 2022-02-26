@@ -32,15 +32,6 @@ const ManagementContainer = styled.div`
     margin: 1rem;
 `;
 
-const Management = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    border: 3px solid #F7F9F8;
-    border-radius: 30px;
-
-`;
-
 const Dashboard = () => {
     const [products, setProducts] = useState(null);
     const [categories, setCategories] = useState();

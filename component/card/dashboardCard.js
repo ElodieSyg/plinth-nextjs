@@ -5,13 +5,12 @@ import styled from "styled-components";
 const DashboardCard = props => {
     const Container = styled.div`
         padding: 1.5rem;
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         cursor: ${props.onClick && "pointer"};
-        border: 3px solid #F7F9F8;
         border-radius: 10px;
     
         :hover {

@@ -25,7 +25,7 @@ const AboutContainer = styled.div`
 
 const CardContainer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
 `;
 

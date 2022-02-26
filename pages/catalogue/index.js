@@ -36,7 +36,7 @@ const ProductContainer = styled.div`
     display: flex;
     flex-direction: column;
     flex: 1;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     scroll-behavior: smooth;
     height: 25rem;
     overflow-y: scroll;
@@ -58,7 +58,7 @@ const ContactContainer = styled.div`
     justify-content: center;
     padding: 1rem;
     margin: 1rem 1rem 1rem 1rem;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 `;
 
 const ButtonContainer = styled.div`
@@ -67,8 +67,8 @@ const ButtonContainer = styled.div`
 
 const DetailsContainer = styled.div`
     margin: 1rem 1rem 1rem 1rem;
-    padding: 1rem;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    padding: 4rem;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     display: flex;
     align-items: center;
 `;
