@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
+// STYLED COMPONENTS
 const Text = styled.p`
-    color: grey;
+    color: white;
 `;
 
-const GreySmallText = (props) => {
+const WhiteSmallText = (props) => {
     return (
         <Text>
             {props.children}
@@ -12,4 +13,4 @@ const GreySmallText = (props) => {
     );
 };
 
-export default GreySmallText;
+export default WhiteSmallText;

@@ -10,6 +10,7 @@ import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 // COMPONENTS IMPORTATIONS
 import Navbar from "../component/layout/navbar/navbar";
+import Footer from "../component/layout/footer";
 import HomeCard from "../component/card/homeCard";
 import Loader from "../component/loader";
 // STYLED COMPONENTS IMPORTATIONS
@@ -27,6 +28,7 @@ const CardContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  margin-bottom: 2rem;
 `;
 
 const Item = styled.div`
@@ -58,7 +60,7 @@ const Home = () => {
   };
 
   return (
-    <>
+    <div>
       <Head>
         <title>Plinth</title>
       </Head>
@@ -90,7 +92,8 @@ const Home = () => {
           ))
         }
       </CardContainer>
-    </>
+      <Footer />
+    </div>
   );
 };
 

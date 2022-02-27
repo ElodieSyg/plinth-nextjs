@@ -8,6 +8,7 @@ import { server } from "../../tools";
 import redirect from "../../utils/redirect";
 // COMPONENTS IMPORTATIONS
 import Navbar from "../../component/layout/navbar/navbar";
+import Footer from "../../component/layout/footer";
 import DashboardCard from "../../component/card/dashboardCard";
 import ManagementCard from "../../component/card/managementCard";
 import Loader from "../../component/loader";
@@ -62,7 +63,7 @@ const Dashboard = () => {
     };
 
     return (
-        <>
+        <div>
             <Head>
                 <title>Plinth - Dashboard</title>
             </Head>
@@ -80,13 +81,12 @@ const Dashboard = () => {
                         onClick={() => redirect("/favorites")}
                         description="Vos favoris" />
                     <DashboardCard
-                        count="+1"
                         source="/add.png"
                         alt="add new image"
                         description="Déposer une nouvelle annonce"
                         onClick={() => redirect("/new-product")} />
                     <DashboardCard
-                        count={13}
+                        count={products.length}
                         source="/onlinead.png"
                         alt="online announce image"
                         description="Vos annonces" />
@@ -106,7 +106,8 @@ const Dashboard = () => {
                     }
                 </ManagementContainer>
             </Container>
-        </>
+            <Footer />
+        </div>
     );
 };
 

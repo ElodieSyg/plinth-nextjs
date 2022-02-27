@@ -3,6 +3,7 @@ import Head from "next/head";
 import styled from "styled-components";
 // COMPONENTS IMPORTATION
 import Navbar from "../../component/layout/navbar/navbar";
+import Footer from "../../component/layout/footer";
 import BottomLineInput from "../../component/layout/input/ContactInput";
 import GlobalContainer from "../../styles/styled-components/container/GlobalContainer";
 import GreenTitle from "../../component/layout/title/GreenTitle";
@@ -48,7 +49,7 @@ const Contact = () => {
     };
 
     return (
-        <>
+        <div>
             <Head>
                 <title>Plinth - Contact</title>
             </Head>
@@ -77,7 +78,8 @@ const Contact = () => {
                     </Item>
                 </ContactContainer>
             </GlobalContainer>
-        </>
+            <Footer />
+        </div>
     );
 };
 

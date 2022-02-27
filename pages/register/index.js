@@ -7,6 +7,7 @@ import styled from "styled-components";
 import redirect from "../../utils/redirect";
 // COMPONENTS IMPORTATION
 import Navbar from "../../component/layout/navbar/navbar";
+import Footer from "../../component/layout/footer";
 import GreenButton from "../../component/layout/button/GreenButton";
 import WhiteButton from "../../component/layout/button/WhiteButton";
 import BasicInput from "../../component/layout/input/StyledInput";
@@ -52,7 +53,7 @@ const Register = () => {
     };
 
     return (
-        <>
+        <div>
             <Head>
                 <title>Plinth - Créez votre compte</title>
             </Head>
@@ -96,7 +97,8 @@ const Register = () => {
                     </ButtonContainer>
                 </RegisterContainer>
             </GlobalContainer>
-        </>
+            <Footer />
+        </div>
     );
 };
 

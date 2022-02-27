@@ -8,6 +8,7 @@ import styled from "styled-components";
 import redirect from "../../utils/redirect";
 // COMPONENTS IMPORTATION
 import Navbar from "../../component/layout/navbar/navbar";
+import Footer from "../../component/layout/footer";
 import GreenButton from "../../component/layout/button/GreenButton";
 import WhiteButton from "../../component/layout/button/WhiteButton";
 import BasicInput from "../../component/layout/input/StyledInput";
@@ -58,7 +59,7 @@ const Login = ({ providers }) => {
 
 
     return (
-        <>
+        <div>
             <Head>
                 <title>Plinth - Login</title>
             </Head>
@@ -110,7 +111,8 @@ const Login = ({ providers }) => {
                     }
                 </LoginContainer>
             </GlobalContainer>
-        </>
+            <Footer />
+        </div>
     );
 };
 

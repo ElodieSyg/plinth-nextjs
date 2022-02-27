@@ -11,6 +11,7 @@ import { server } from "../../tools";
 import redirect from "../../utils/redirect";
 // COMPONENTS IMPORTATIONS
 import Navbar from "../../component/layout/navbar/navbar";
+import Footer from "../../component/layout/footer";
 import CatalogCard from "../../component/card/catalogCard";
 import Loader from "../../component/loader";
 import CatalogMap from "../../component/map/catalogMap";
@@ -57,7 +58,7 @@ const ContactContainer = styled.div`
     align-items: center;
     justify-content: center;
     padding: 1rem;
-    margin: 1rem 1rem 1rem 1rem;
+    margin: 1rem 1rem 3rem 1rem;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 `;
 
@@ -129,7 +130,7 @@ const Catalog = () => {
     };
 
     return (
-        <>
+        <div>
             <Head>
                 <title>Plinth - Catalogue</title>
             </Head>
@@ -210,7 +211,8 @@ const Catalog = () => {
                     </GreenRoundedButton>
                 </ButtonContainer>
             </ContactContainer>
-        </>
+            <Footer />
+        </div>
     );
 };
 
