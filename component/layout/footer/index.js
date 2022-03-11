@@ -32,9 +32,6 @@ const Footer = () => {
     return (
         <Container>
             <MenuContainer>
-                <Item onClick={() => redirect("/faq")}>
-                    <WhiteSmallText>FAQ</WhiteSmallText>
-                </Item>
                 <Item onClick={() => redirect("/contact")}>
                     <WhiteSmallText>Contact</WhiteSmallText>
                 </Item>

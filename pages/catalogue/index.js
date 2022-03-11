@@ -58,7 +58,7 @@ const ContactContainer = styled.div`
     align-items: center;
     justify-content: center;
     padding: 1rem;
-    margin: 1rem 1rem 3rem 1rem;
+    margin: 3rem 1rem 3rem 1rem;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 `;
 
@@ -67,7 +67,7 @@ const ButtonContainer = styled.div`
 `;
 
 const DetailsContainer = styled.div`
-    margin: 1rem 1rem 1rem 1rem;
+    margin: 3rem 1rem 1rem 1rem;
     padding: 4rem;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     display: flex;

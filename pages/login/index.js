@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getProviders, signIn, signOut, useSession } from "next-auth/react";
+import { getProviders, getSession, signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Image from "next/image";
@@ -56,6 +56,8 @@ const Login = ({ providers }) => {
     const preventDefault = (e) => {
         e.preventDefault();
     };
+
+
 
 
     return (
@@ -116,7 +118,7 @@ const Login = ({ providers }) => {
     );
 };
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ req }) {
     const providers = await getProviders();
 
     return {
@@ -124,6 +126,12 @@ export async function getServerSideProps() {
             providers,
         },
     };
+
+    const session = await getSession({ req });
+
+    if (session) {
+        
+    }
 };
 
 export default Login;

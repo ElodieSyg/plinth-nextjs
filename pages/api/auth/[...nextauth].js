@@ -70,10 +70,12 @@ export default NextAuth({
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         }),
     ],
+    debug: true,
     callbacks: {
         async jwt({ token, account }) {
             if (account) {
                 token.accessToken = account.access_token;
+                
             };
             return token;
         },
@@ -84,12 +86,11 @@ export default NextAuth({
             };
             return session
         },
-        async signIn(user, account, profile) {
-            if (user && user.isActive === "1") {
-                return user;
-            } else {
-                return false;
-            };
+        async signIn({ account, profile }) {
+            if (account.provider === "google") {
+                return profile.email_verified && profile.email.endsWith("@example.com")
+            }
+            return true
         },
     },
     secret: process.env.SECRET_AUTH,
@@ -98,7 +99,7 @@ export default NextAuth({
         encryption: true,
     },
     pages: {
-        signIn: "/auth/signin",
+        signIn: "/pages/api/contact",
         // signOut: "/auth/logout",
         // error: "/auth/error",
         // newUser: "/auth/new-user",

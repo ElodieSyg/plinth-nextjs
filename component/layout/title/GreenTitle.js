@@ -5,6 +5,7 @@ const GreenTitle = (props) => {
         color: #8fb4a0;
         text-align: ${props.textAlign};
         margin: 1rem;
+        font-size: ${props.fontSize};
     `;
 
     return (
